@@ -57,8 +57,8 @@ MySQL은 각 데이터를 저장할 퍼시스턴트볼륨이 필요하다.
 
 이미지 사진!
 
-'''
 
+```
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -74,13 +74,13 @@ spec:
     path: "/data/k8s/mysql"
   storageClassName: cp-storageclass
 
- '''
+```
 
 ### <div id='3-1-2'/> 3.1.2. persistentVolumeClaim 생성
 
 	이미지 사진!
 
-'''
+```
 
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -95,13 +95,13 @@ spec:
     requests:
       storage: 20Gi
 
- '''
+```
 
 
 ### <div id='3-1-3'/> 3.1.3. MySQL deployment 생성
 
 
-'''
+```
 
 apiVersion: apps/v1
 kind: Deployment
@@ -139,13 +139,13 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-pvc
 
-'''
+```
 
 
 
 ### <div id='3-1-4'/> 3.1.4. MySQL service 생성
 
-'''
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -162,13 +162,14 @@ spec:
     tier: mysql
   type: NodePort
 
-'''
+```
 
 
 ## <div id='3-2'/>3.2. 플레이 파크 컨테이너 플랫폼 포털을 활용한 WordPress 배포
 
 ### <div id='3-2-1'/> 3.2.1. persistentVolume 생성
-'''
+
+```
 
 kind: PersistentVolume
 apiVersion: v1
@@ -185,11 +186,11 @@ spec:
     path: "/data/k8s/wp"
   storageClassName: cp-storageclass
   
-'''
+```
 
 ### <div id='3-2-2'/> 3.2.2. persistentVolumeClaim 생성
 
-'''
+```
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -204,11 +205,11 @@ spec:
     requests:
       storage: 20Gi
 
-'''
+```
 
 ### <div id='3-2-3'/> 3.2.3. WordPress Deployment 생성
 
-'''
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -247,12 +248,11 @@ spec:
         persistentVolumeClaim:
           claimName: wp-pvc
 
-'''
+```
 
 ### <div id='3-2-4'/> 3.2.4. WordPress Service 생성
 
-
-'''
+```
 
 apiVersion: v1
 kind: Service
@@ -269,5 +269,5 @@ spec:
     app: wordpress
     tier: frontend
 
-'''
+```
 
