@@ -20,17 +20,17 @@
     * [3.2.3. WordPress 디플로이먼트 생성](#3-2-3)
     * [3.2.4. WordPress 서비스 생성](#3-2-4)
     * [3.2.5. 정상배포 확인](#3-2-5)
-4. [컨테이너 플랫폼 포탈을 사용한 MySQL과 WordPress 삭제](#4)
-    * [4.1. 컨테이너 플랫폼 포털을 사용한 MySQL 삭제](#4-1)
-    * [4.1.1. MySQL 서비스 삭제 ](#4-1-1)
-    * [4.1.2. MySQL 디플로이먼트 삭제 ](#4-1-2)
-    * [4.1.3. MySQL 퍼시스턴트 볼륨 클레임 삭제 ](#4-1-3)
-    * [4.1.4. MySQL 퍼시스턴트 볼륨 삭제 ](#4-1-4)
+4. [컨테이너 플랫폼 포탈을 사용한 WordPress와 MySQL과 삭제](#4)
+    * [4.1. 컨테이너 플랫폼 포털을 사용한 WordPress 삭제](#4-1)
+    * [4.1.1. WordPress 서비스 삭제 ](#4-1-1)
+    * [4.1.2. WordPress 디플로이먼트 삭제 ](#4-1-2)
+    * [4.1.3. WordPress 퍼시스턴트 볼륨 클레임 삭제 ](#4-1-3)
+    * [4.1.4. WordPress 퍼시스턴트 볼륨 삭제 ](#4-1-4)
     * [4.2. 컨테이너 플랫폼 포털을 사용한 WordPress 삭제](#4-1)
-    * [4.2.1. WordPress 서비스 삭제 ](#4-1-1)
-    * [4.2.2. WordPress 디플로이먼트 삭제 ](#4-1-2)
-    * [4.2.3. WordPress 퍼시스턴트 볼륨 클레임 삭제 ](#4-1-3)
-    * [4.2.4. WordPress 퍼시스턴트 볼륨 삭제 ](#4-1-4)
+    * [4.2.1. MySQL과 서비스 삭제 ](#4-1-1)
+    * [4.2.2. MySQL과 디플로이먼트 삭제 ](#4-1-2)
+    * [4.2.3. MySQL과 퍼시스턴트 볼륨 클레임 삭제 ](#4-1-3)
+    * [4.2.4. MySQL과 퍼시스턴트 볼륨 삭제 ](#4-1-4)
 
 
 
@@ -50,9 +50,9 @@
 ## <div id='2-1'/>2.1. 컨테이너 플랫폼 포탈 접속
 1. 컨테이너 플랫폼 포털에 접속해서 로그인을 한다. 
 
-	* 컨테이너 플랫폼 포털 URL : http://portal.${HOST_DOMAIN}
-	* [[3.1.2. 컨테이너 플랫폼 포털 변수 정의]](https://github.com/K-PaaS/container-platform/blob/master/install-guide/portal/cp-portal-standalone-guide.md#3.1.2) 에서 정의한 HOST_DOMAIN 값 입력
-		>해당 가이드를 단독형배포 환경으로 작성하라고 하셔서 이렇게 작성했는데 플레이 파크는 서비스형// 나중에 수정
+  * 컨테이너 플랫폼 포털 URL : http://portal.${HOST_DOMAIN}
+  * [[3.1.2. 컨테이너 플랫폼 포털 변수 정의]](https://github.com/K-PaaS/container-platform/blob/master/install-guide/portal/cp-portal-standalone-guide.md#3.1.2) 에서 정의한 HOST_DOMAIN 값 입력
+    >해당 가이드를 단독형배포 환경으로 작성하라고 하셔서 이렇게 작성했는데 플레이 파크는 서비스형// 나중에 수정
 
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)
 
@@ -79,7 +79,7 @@ MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트볼륨이 필요
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_4.jpeg)
 
 3. 퍼시스턴트 볼륨을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_5.jpeg)
 
 
@@ -126,7 +126,7 @@ spec:
 
 
 3. 퍼시스턴트 볼륨 클레임을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_10.jpeg)
 
 
@@ -172,7 +172,7 @@ spec:
 
 
 3. 디플로이먼트를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_15.jpeg)
 
 
@@ -240,7 +240,7 @@ spec:
 
 
 3. 서비스를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_20.jpeg)
 
 
@@ -288,7 +288,7 @@ spec:
 
 
 3. 퍼시스턴트 볼륨을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_25.jpeg)
 
 
@@ -333,7 +333,7 @@ spec:
 
 
 3. 퍼시스턴트 볼륨 클레임을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_29.jpeg)
 
 
@@ -376,7 +376,7 @@ spec:
 
 
 3. 디플로이먼트를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_34.jpeg)
 
 
@@ -448,7 +448,7 @@ spec:
 
 
 3. 서비스를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-	- 작성을 마치면 "저장" 버튼을 누른다.
+  - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_39.jpeg)
 
 
@@ -487,113 +487,149 @@ spec:
 
 <br>
 
-# <div id='4'/> 4. 컨테이너 플랫폼 포탈을 사용한 MySQL과 WordPress 삭제
-본 장에서는 컨테이너 플랫폼 포탈을 사용하여 MySQL과 WordPress를 삭제하는 방법에 대해서 기술한다.
-
-## <div id='4-1'/> 4.1. 컨테이너 플랫폼 포탈을 사용한 MySQL 삭제
-본 장에서는 플레이파크 컨테이너 플랫폼 포털을 사용하여 MySQL 삭제 방법에 대해 기술한다.
-
-## <div id='4-1-1'/>4.1.1 MySQL 서비스 삭제
-1. Services 목록에서 삭제할 서비스를 클릭하여 상세 페이지로 이동한다.
-2. 서비스 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+# <div id='4'/> 4. 컨테이너 플랫폼 포탈을 사용한 WordPress와 MySQL 삭제
+본 장에서는 컨테이너 플랫폼 포탈을 사용하여 WordPress와 MySQL을 삭제하는 방법에 대해서 기술한다.
 
 
-
-## <div id='4-1-2'/>4.1.2 MySQL 디플로이먼트 삭제
-1. Deployments 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
-2. 디플로이먼트 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-
-
-## <div id='4-1-3'/>4.1.3 MySQL 퍼시스턴트 볼륨 클레임 삭제
-1. Persistent volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
-2. 퍼시스턴트 볼륨 클레임 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-
-
-## <div id='4-1-4'/>4.1.4 MySQL 퍼시스턴트 볼륨 삭제
-1. Persistent volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
-2. 퍼시스턴트 볼륨 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-
-## <div id='4-2'/> 4.1. 컨테이너 플랫폼 포탈을 사용한 WordPress 삭제
+## <div id='4-1'/> 4.1. 컨테이너 플랫폼 포탈을 사용한 WordPress 삭제
 본 장에서는 플레이파크 컨테이너 플랫폼 포털을 사용하여 WordPress 삭제 방법에 대해 기술한다.
 
-## <div id='4-2-1'/>4.1.1 WordPress 서비스 삭제
-1. Services 목록에서 삭제할 서비스를 클릭하여 상세 페이지로 이동한다.
-2. 서비스 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+## <div id='4-1-1'/>4.1.1 WordPress 서비스 삭제
+1. Services > Services를 클릭해서 Service목록으로 이동한다. 
+![image](../images/mysql-wordpress-delete-img/delete-img-17.jpeg)
 
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+2. 목록에서 삭제할 서비스를 클릭하여 상세 페이지로 이동한다.
+  * 서비스 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-18.jpeg)
 
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-19.jpeg)
 
-
-
-## <div id='4-2-2'/>4.1.2 WordPress 디플로이먼트 삭제
-1. Deployments 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
-2. 디플로이먼트 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-20.jpeg)
 
 
 
-## <div id='4-2-3'/>4.1.3 WordPress 퍼시스턴트 볼륨 클레임 삭제
+## <div id='4-1-2'/>4.1.2 WordPress 디플로이먼트 삭제
+1. Workloads > Deployments 클릭해서 Deployments 목록으로 이동한다. 
+![image](../images/mysql-wordpress-delete-img/delete-img-21.jpeg)
+
+
+2. 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+  * 디플로이먼트 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-22.jpeg)
+
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-23.jpeg)
+
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-24.jpeg)
+
+
+
+## <div id='4-1-3'/>4.1.3 WordPress 퍼시스턴트 볼륨 클레임 삭제
 1. Persistent volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
-2. 퍼시스턴트 볼륨 클레임 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
-
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+![image](../images/mysql-wordpress-delete-img/delete-img-25.jpeg)
 
 
+2. 목록에서 삭제할 퍼시스턴트 볼륨 클레임을 클릭하여 상세 페이지로 이동한다.
 
-## <div id='4-2-4'/>4.1.4 WordPress 퍼시스턴트 볼륨 삭제
+  * 퍼시스턴트 볼륨 클레임 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-26.jpeg)
+
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-27.jpeg)
+
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-29.jpeg)
+
+
+
+
+## <div id='4-1-4'/>4.1.4 WordPress 퍼시스턴트 볼륨 삭제
 1. Persistent volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
-2. 퍼시스턴트 볼륨 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+![image](../images/mysql-wordpress-delete-img/delete-img-30.jpeg)
 
-3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
 
-4. 정상적으로 삭제가 되면 다음과 같은 팝업이 나타난다.
-![image](./img_delete/playpark_portal_guide_img_41.jpeg)
+2. 목록에서 삭제할 퍼시스턴트 볼륨을 클릭하여 상세 페이지로 이동한다.
+  * 퍼시스턴트 볼륨 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-31.jpeg)
 
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-32.jpeg)
+
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-33.jpeg)
+
+
+
+
+## <div id='4-2'/> 4.1. 컨테이너 플랫폼 포탈을 사용한 MySQL 삭제
+본 장에서는 플레이파크 컨테이너 플랫폼 포털을 사용하여 MySQL 삭제 방법에 대해 기술한다.
+
+## <div id='4-2-1'/>4.1.1 MySQL 서비스 삭제
+1. Services > Services를 클릭해서 Service목록으로 이동한다. 
+![image](../images/mysql-wordpress-delete-img/delete-img-1.jpeg)
+
+2. 목록에서 삭제할 서비스를 클릭하여 상세 페이지로 이동한다.
+  * 서비스 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-2.jpeg)
+
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-3.jpeg)
+
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-4.jpeg)
+
+
+
+## <div id='4-2-2'/>4.1.2 MySQL 디플로이먼트 삭제
+1. Workloads > Deployments 클릭해서 Deployments 목록으로 이동한다. 
+![image](../images/mysql-wordpress-delete-img/delete-img-5.jpeg)
+
+
+2. 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+  * 디플로이먼트 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-6.jpeg)
+
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-7.jpeg)
+
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-8.jpeg)
+
+
+
+## <div id='4-2-3'/>4.1.3 MySQL 퍼시스턴트 볼륨 클레임 삭제
+1. Persistent volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-9.jpeg)
+
+
+2. 목록에서 삭제할 퍼시스턴트 볼륨 클레임을 클릭하여 상세 페이지로 이동한다.
+
+  * 퍼시스턴트 볼륨 클레임 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-10.jpeg)
+
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-11.jpeg)
+
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-12.jpeg)
+
+
+
+
+## <div id='4-2-4'/>4.1.4 MySQL 퍼시스턴트 볼륨 삭제
+1. Persistent volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-13.jpeg)
+
+
+2. 목록에서 삭제할 퍼시스턴트 볼륨을 클릭하여 상세 페이지로 이동한다.
+  * 퍼시스턴트 볼륨 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-14.jpeg)
+
+4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-15.jpeg)
+
+5. 정상적으로 삭제가 된 것을 확인한다.
+![image](../images/mysql-wordpress-delete-img/delete-img-16.jpeg)
