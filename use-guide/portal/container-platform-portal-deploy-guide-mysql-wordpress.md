@@ -92,7 +92,7 @@ spec:
 
 
 3. 퍼시스턴트 볼륨 클레임을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-  - 작성을 마치면 "저장" 버튼을 누른다.
+      - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_10.jpeg)
 
 
@@ -138,7 +138,7 @@ spec:
 
 
 3. 디플로이먼트를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-  - 작성을 마치면 "저장" 버튼을 누른다.
+     - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_15.jpeg)
 
 
@@ -206,7 +206,7 @@ spec:
 
 
 3. 서비스를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-  - 작성을 마치면 "저장" 버튼을 누른다.
+     - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_20.jpeg)
 
 
@@ -254,7 +254,7 @@ spec:
 
 
 3. 퍼시스턴트 볼륨을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-  - 작성을 마치면 "저장" 버튼을 누른다.
+     - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_25.jpeg)
 
 
@@ -300,7 +300,7 @@ spec:
 
 
 3. 퍼시스턴트 볼륨 클레임을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-  - 작성을 마치면 "저장" 버튼을 누른다.
+     - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_29.jpeg)
 
 
@@ -343,7 +343,7 @@ spec:
 
 
 3. 디플로이먼트를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-  - 작성을 마치면 "저장" 버튼을 누른다.
+     - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_34.jpeg)
 
 
@@ -415,7 +415,7 @@ spec:
 
 
 3. 서비스를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
-  - 작성을 마치면 "저장" 버튼을 누른다.
+     - 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_39.jpeg)
 
 
@@ -449,7 +449,7 @@ spec:
 ## <div id='3-3'/> 3.3. 서비스 접속 확인
 
 컨테이너 플랫폼 포탈로 배포한 WordPress 접속 방법
-   - http://playpark-cp.k-paas.org:{service_port} 접속을 확인한다.
+      - http://playpark-cp.k-paas.org:{service_port} 접속을 확인한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_42.jpeg)
 
 <br>
