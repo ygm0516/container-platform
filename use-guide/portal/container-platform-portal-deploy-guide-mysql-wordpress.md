@@ -498,17 +498,18 @@ spec:
 1. Services > Services를 클릭해서 Service목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-17.jpeg)
 
+
 2. 목록에서 삭제할 서비스를 클릭하여 상세 페이지로 이동한다.
   * 서비스 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-32.jpeg)
 
+
 3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-18.jpeg)
 
+
 4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-19.jpeg)
-
-![image](../images/mysql-wordpress-delete-img/delete-img-20.jpeg)
 
 
 
@@ -521,10 +522,12 @@ spec:
   * 디플로이먼트 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-21.jpeg)
 
-4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+
+3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-22.jpeg)
 
-5. 정상적으로 삭제가 된 것을 확인한다.
+
+4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-23.jpeg)
 
 
@@ -535,14 +538,15 @@ spec:
 
 
 2. 목록에서 삭제할 퍼시스턴트 볼륨 클레임을 클릭하여 상세 페이지로 이동한다.
-
   * 퍼시스턴트 볼륨 클레임 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-25.jpeg)
 
-4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+
+3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-26.jpeg)
 
-5. 정상적으로 삭제가 된 것을 확인한다.
+
+4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-27.jpeg)
 
 
@@ -557,10 +561,12 @@ spec:
   * 퍼시스턴트 볼륨 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-29.jpeg)
 
-4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+
+3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-30.jpeg)
 
-5. 정상적으로 삭제가 된 것을 확인한다.
+
+4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-31.jpeg)
 
 
@@ -573,14 +579,17 @@ spec:
 1. Services > Services를 클릭해서 Service목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-1.jpeg)
 
+
 2. 목록에서 삭제할 서비스를 클릭하여 상세 페이지로 이동한다.
   * 서비스 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-2.jpeg)
 
-4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+
+3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-3.jpeg)
 
-5. 정상적으로 삭제가 된 것을 확인한다.
+
+4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-4.jpeg)
 
 
@@ -594,10 +603,12 @@ spec:
   * 디플로이먼트 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-6.jpeg)
 
-4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+
+3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-7.jpeg)
 
-5. 정상적으로 삭제가 된 것을 확인한다.
+
+4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-8.jpeg)
 
 
@@ -608,14 +619,15 @@ spec:
 
 
 2. 목록에서 삭제할 퍼시스턴트 볼륨 클레임을 클릭하여 상세 페이지로 이동한다.
-
   * 퍼시스턴트 볼륨 클레임 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-10.jpeg)
 
-4. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
+
+3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-11.jpeg)
 
-5. 정상적으로 삭제가 된 것을 확인한다.
+
+4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-12.jpeg)
 
 
@@ -630,8 +642,11 @@ spec:
   * 퍼시스턴트 볼륨 상세 피이지에서 하단 왼쪽에 있는 "삭제" 버튼 클릭한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-14.jpeg)
 
+
 3. 팝업창이 뜨면 "확인" 버튼을 누르면 삭제를 시작한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-15.jpeg)
 
+
 4. 정상적으로 삭제가 된 것을 확인한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-16.jpeg)
+
