@@ -441,7 +441,7 @@ spec:
 ### <div id='3-2-5'/> 3.2.5. 서비스 접속 확인
 
 컨테이너 플랫폼 포탈로 배포한 WordPress 접속 방법
-   - http://playpark-cp.k-paas.org:{service_port}로 접속을 확인한다.
+   - http://playpark-cp.k-paas.org:{service_port} 접속을 확인한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_42.jpeg)
 
 <br>
@@ -533,7 +533,7 @@ spec:
 
 
 ## <div id='4-2'/> 4.1. 컨테이너 플랫폼 포탈을 사용한 MySQL 삭제
-본 장에서는 플레이파크 컨테이너 플랫폼 포털을 사용하여 MySQL 삭제 방법에 대해 기술한다.
+플레이파크 컨테이너 플랫폼 포털을 사용하여 MySQL 삭제 방법에 대해 기술한다.
    * 일반적으로 삭제는 배포 순서의 반대로 진행한다.
 
 ## <div id='4-2-1'/>4.1.1 MySQL 서비스 삭제
