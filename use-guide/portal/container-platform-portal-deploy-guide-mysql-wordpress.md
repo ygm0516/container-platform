@@ -57,12 +57,14 @@ MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트볼륨이 필요
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_7.jpeg)
 
 
-다음 코드는 MySQL 퍼시스턴트 볼륨을 생성하는 예시 코드이다.
+MySQL 퍼시스턴트 볼륨을 생성하는 예시 코드이다.  
 기본 스토리지클래스를 사용하여 퍼시스턴트볼륨을 생성하도록 작성되었다.
 
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 퍼시스턴트 볼륨을 생성한다.
 
 ```
+#mysql-pv
+
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -105,11 +107,12 @@ spec:
 
 
 
-다음 코드는 MySQL 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.
-
+MySQL 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 퍼시스턴트 볼륨 클레임을 생성한다.
 
 ```
+#mysql-pvc
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -150,10 +153,12 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_17.jpeg)
 
 
-다음 코드는 MySQL 디플로이먼트를을 생성하는 예시 코드이다.
+MySQL 디플로이먼트를을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 디플로이먼트를 생성한다.
 
 ```
+#mysql-deployment
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -218,11 +223,13 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_22.jpeg)
 
 
-다음 코드는 MySQL 서비스를 생성하는 예시 코드이다.
+MySQL 서비스를 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 서비스를 생성한다.
 
 
 ```
+#mysql-service
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -266,12 +273,13 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_43.jpeg)
 
 
-다음 코드는 WordPress 퍼시스턴트 볼륨을 생성하는 예시 코드이다.
-기본 스토리지클래스를 사용하여 퍼시스턴트볼륨을 생성하도록 작성되었다.
-
+WordPress 퍼시스턴트 볼륨을 생성하는 예시 코드이다.  
+기본 스토리지클래스를 사용하여 퍼시스턴트볼륨을 생성하도록 작성되었다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 퍼시스턴트 볼륨을 생성한다.
 
 ```
+#wordpress-pv
+
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -312,10 +320,12 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_31.jpeg)
 
 
-다음 코드는 WordPress 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.
+WordPress 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 퍼시스턴트 볼륨 클레임을 생성한다.
 
 ```
+#wordpress-pvc
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -355,11 +365,13 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_36.jpeg)
 
 
-다음 코드는 WordPress 디플로이먼트를 생성하는 예시 코드이다.
+WordPress 디플로이먼트를 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 디플로이먼트를 생성한다.
 
 
 ```
+#wordpress-deployment
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -427,10 +439,12 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_41.jpeg)
 
 
-다음 코드는 WordPress 서비스를 노드포트로 생성하는 예시 코드이다.
+WordPress 서비스를 노드포트로 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포탈에서 서비스를 생성한다.
 
 ```
+#wordpress-service
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -459,7 +473,6 @@ spec:
 
 
 ## <div id='4-1'/> 4.1. 컨테이너 플랫폼 포탈을 사용한 WordPress 삭제
-본 장에서는 플레이파크 컨테이너 플랫폼 포털을 사용하여 WordPress 삭제 방법에 대해 기술한다.
    * 일반적으로 삭제는 배포 순서의 반대로 진행한다.
 
 ## <div id='4-1-1'/>4.1.1 WordPress 서비스 삭제
@@ -541,7 +554,6 @@ spec:
 
 
 ## <div id='4-2'/> 4.2. 컨테이너 플랫폼 포탈을 사용한 MySQL 삭제
-플레이파크 컨테이너 플랫폼 포털을 사용하여 MySQL 삭제 방법에 대해 기술한다.
    * 일반적으로 삭제는 배포 순서의 반대로 진행한다.
 
 ## <div id='4-2-1'/>4.2.1 MySQL 서비스 삭제
