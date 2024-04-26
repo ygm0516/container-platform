@@ -53,6 +53,7 @@
 	* 컨테이너 플랫폼 포털 URL : http://portal.${HOST_DOMAIN}
 	* [[3.1.2. 컨테이너 플랫폼 포털 변수 정의]](https://github.com/K-PaaS/container-platform/blob/master/install-guide/portal/cp-portal-standalone-guide.md#3.1.2) 에서 정의한 HOST_DOMAIN 값 입력
 		>해당 가이드를 단독형배포 환경으로 작성하라고 하셔서 이렇게 작성했는데 플레이 파크는 서비스형// 나중에 수정
+
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)
 
 2. 로그인에 성공하면 다음과 같은 대시보드가 보여진다.
