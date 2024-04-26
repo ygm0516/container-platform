@@ -20,10 +20,18 @@
     * [3.2.2. 퍼시스턴트 볼륨 클레임 배포](#3-2-2)
     * [3.2.3. WordPress 디플로이먼트 생성](#3-2-3)
     * [3.2.4. WordPress 서비스 생성](#3-2-4)
-    * [3.2.5. 서비스 접속 확인](#3-2-5)
-4. [컨테이너 플랫폼 포털을 사용한 WordPress와 MySQL과 삭제](#4)
-    * [4털 활용한 MySQL 배포
-
+    * [3.3 서비스 접속 확인](#3-2-5)
+4. [컨테이너 플랫폼 포털을 사용한 WordPress와 MySQL 삭제](#4)
+    * [4.1.컨테이너 플랫폼 포털을 사용한 WordPress 삭제](#4-1)
+    * [4.1.1.  WordPress 서비스 삭제](#4-1-1)
+    * [4.1.2. WordPress 디플로이먼트 삭제](#4-1-2)
+    * [4.1.3. WordPress 퍼시스턴트 볼륨 클레임 삭제](#4-1-3)
+    * [4.1.4. WordPress 퍼시스턴트 볼륨 삭제](#4-1-4)
+    * [4.2. 컨테이너 플랫폼 포털을 사용한 MySQL 삭제](#4-2)
+    * [4.2.1. MySQL 서비스 삭제](#4-2-1)
+    * [4.2.2. MySQL 디플로이먼트 삭제](#4-2-2)
+    * [4.2.3. MySQL 퍼시스턴트 볼륨 클레임 삭제](#4-2-3)
+    * [4.2.4. MySQL 퍼시스턴트 볼륨 삭제](#4-2-4)
 
 
 ### <div id='3-1-1'/> 3.1.1. 퍼시스턴트 볼륨 생성
@@ -438,7 +446,7 @@ spec:
     tier: frontend
 ```
 
-### <div id='3-2-5'/> 3.2.5. 서비스 접속 확인
+## <div id='3-3'/> 3.3. 서비스 접속 확인
 
 컨테이너 플랫폼 포탈로 배포한 WordPress 접속 방법
    - http://playpark-cp.k-paas.org:{service_port} 접속을 확인한다.
@@ -532,11 +540,11 @@ spec:
 
 
 
-## <div id='4-2'/> 4.1. 컨테이너 플랫폼 포탈을 사용한 MySQL 삭제
+## <div id='4-2'/> 4.2. 컨테이너 플랫폼 포탈을 사용한 MySQL 삭제
 플레이파크 컨테이너 플랫폼 포털을 사용하여 MySQL 삭제 방법에 대해 기술한다.
    * 일반적으로 삭제는 배포 순서의 반대로 진행한다.
 
-## <div id='4-2-1'/>4.1.1 MySQL 서비스 삭제
+## <div id='4-2-1'/>4.2.1 MySQL 서비스 삭제
 1. Services > Services를 클릭해서 Service목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-1.jpeg)
 
@@ -555,7 +563,7 @@ spec:
 
 
 
-## <div id='4-2-2'/>4.1.2 MySQL 디플로이먼트 삭제
+## <div id='4-2-2'/>4.2.2 MySQL 디플로이먼트 삭제
 1. Workloads > Deployments 클릭해서 Deployments 목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-5.jpeg)
 
@@ -574,7 +582,7 @@ spec:
 
 
 
-## <div id='4-2-3'/>4.1.3 MySQL 퍼시스턴트 볼륨 클레임 삭제
+## <div id='4-2-3'/>4.2.3 MySQL 퍼시스턴트 볼륨 클레임 삭제
 1. Persistent Volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-9.jpeg)
 
@@ -594,7 +602,7 @@ spec:
 
 
 
-## <div id='4-2-4'/>4.1.4 MySQL 퍼시스턴트 볼륨 삭제
+## <div id='4-2-4'/>4.2.4 MySQL 퍼시스턴트 볼륨 삭제
 1. Persistent Volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-13.jpeg)
 
