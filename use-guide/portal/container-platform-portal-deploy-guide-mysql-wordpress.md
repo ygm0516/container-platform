@@ -309,7 +309,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: wp-pv
-  lables:
+  labels:
     app: wordpress
 spec:
   capacity:
