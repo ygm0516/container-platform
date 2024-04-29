@@ -36,21 +36,21 @@
 # <div id='1'/> 1. 문서 개요
 
 ## <div id='1-1'/> 1.1. 목적
-본 문서는 컨테이너 플랫폼 포탈을 사용할 사용자들에게 MySQL 데이터베이스와 WordPress 사이트를 배포하는 방법에 대해 기술한다.
+본 문서는 플레이파크를 사용하여 사용자들에게 MySQL 데이터베이스와 WordPress 사이트를 배포하는 방법에 대해 기술한다.
 
 ## <div id='1-2'/> 1.2. 범위
-본 문서는 컨테이너 플랫폼 단독형 배포를 기준으로 작성되었다.
-컨테이너 플랫폼 단독형 배포를 기준으로 컨테이너 플랫폼 포털을 사용하여 MySQL 데이터베이스와 WordPress 사이트를 배포하는 방법에 대해 작성되었다.
+컨테이너 플랫폼 포털을 사용하여 MySQL 데이터베이스와 WordPress 사이트를 배포하는 방법에 대해 작성되었다.
 
 <br>
 
 # <div id='2'/> 2. 컨테이너 플랫폼 포털 접속
 
 ## <div id='2-1'/>2.1. 컨테이너 플랫폼 포털 접속
-1. 컨테이너 플랫폼 포털에 접속해서 로그인을 한다. 
+1. 플레이 파크 포털에 접속해서 로그인을 한다.
+      * 플레이 파크 접속 url> http://portal.k-paas.org/
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)
 
-2. 로그인에 성공하면 다음과 같은 대시보드가 보여진다.
+3. 로그인에 성공하면 다음과 같은 대시보드가 보여진다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_2.jpeg)
 
 <br>
