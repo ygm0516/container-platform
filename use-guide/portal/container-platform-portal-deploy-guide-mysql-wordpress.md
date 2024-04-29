@@ -86,7 +86,7 @@
 ## <div id='3-1'/> 3.1. 컨테이너 플랫폼 포털을을 사용한 MySQL 배포
 ### <div id='3-1-1'/> 3.1.1. 퍼시스턴트 볼륨 생성
 
-MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트볼륨이 필요하다.
+MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트 볼륨이 필요하다.
 
 1. 포털 접속을 성공한 이후에 퍼시스턴트 볼륨을 배포하기위해 Storage > Persistent Volumes 버튼을 눌러 접속을 진행한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_3.jpeg)
@@ -102,8 +102,9 @@ MySQL 퍼시스턴트 볼륨을 생성하는 예시 코드이다.
 기본 스토리지클래스를 사용하여 퍼시스턴트 볼륨을 생성하도록 작성되었다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 퍼시스턴트 볼륨을 생성한다.
 
-```
-#mysql-pv
+
+#### Mysql Persistenct Volume
+```bash
 
 kind: PersistentVolume
 apiVersion: v1
@@ -150,8 +151,8 @@ spec:
 MySQL 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 퍼시스턴트 볼륨 클레임을 생성한다.
 
-```
-#mysql-pvc
+#### Mysql Persistenct Volume Claim
+```bash
 
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -197,8 +198,8 @@ spec:
 MySQL 디플로이먼트를을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 디플로이먼트를 생성한다.
 
-```
-#mysql-deployment
+#### Mysql Deployment
+```bash
 
 apiVersion: apps/v1
 kind: Deployment
@@ -270,9 +271,8 @@ MySQL 서비스를 생성하는 예시 코드이다.
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 서비스를 생성한다.
 
 
-```
-#mysql-service
-
+#### Mysql Service
+```bash
 apiVersion: v1
 kind: Service
 metadata:
@@ -320,8 +320,9 @@ WordPress 퍼시스턴트 볼륨을 생성하는 예시 코드이다.
 기본 스토리지클래스를 사용하여 퍼시스턴트 볼륨을 생성하도록 작성되었다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 퍼시스턴트 볼륨을 생성한다.
 
-```
-#wordpress-pv
+#### Wordpress Persistent Volume
+```bash
+
 
 kind: PersistentVolume
 apiVersion: v1
@@ -368,8 +369,8 @@ spec:
 WordPress 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 퍼시스턴트 볼륨 클레임을 생성한다.
 
-```
-#wordpress-pvc
+#### Wordpress Persistent Volume Claim
+```bash
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -415,8 +416,8 @@ WordPress 디플로이먼트를 생성하는 예시 코드이다.
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 디플로이먼트를 생성한다.
 
 
-```
-#wordpress-deployment
+#### Wordpress Deployment
+```bash
 
 apiVersion: apps/v1
 kind: Deployment
@@ -488,8 +489,9 @@ spec:
 WordPress 서비스를 노드포트로 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 서비스를 생성한다.
 
-```
-#wordpress-service
+
+#### Wordpress Service
+```bash
 
 apiVersion: v1
 kind: Service
@@ -541,7 +543,6 @@ WordPress 웹사이트 형식이기 때문에 url로 접근해야한다.
 <br>
 
 #### Redis-leader deployment 
-
 ``` bash
 
 apiVersion: apps/v1
@@ -593,7 +594,6 @@ spec:
 <br>
 
 #### Redis-leader Service 
-
 ```bash
 
 apiVersion: v1
@@ -635,7 +635,6 @@ spec:
   <br>
   
 #### Redis-follower deployment 
-
 ```bash
 
 apiVersion: apps/v1
@@ -691,7 +690,6 @@ spec:
 <br>
 
 #### Redis-follower service 
-
 ```bash
 
 apiVersion: v1
