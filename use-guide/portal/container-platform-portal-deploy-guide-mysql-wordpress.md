@@ -614,7 +614,7 @@ spec:
 
 
 ## <div id='4-2-4'/>4.2.4 MySQL 퍼시스턴트 볼륨 삭제
-1. Persistent Volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+1. Storage > Persistent Volumes 클릭해서 Persistent Volume 목록으로 이동한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-13.jpeg)
 
 
