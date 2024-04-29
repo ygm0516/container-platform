@@ -52,6 +52,7 @@
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_44.jpeg)
 
    * 이미지 두개 중에 선택
+   
 3. 로그인에 성공하면 다음과 같은 대시보드가 보여진다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_2.jpeg)
 
@@ -155,7 +156,7 @@ spec:
 ### <div id='3-1-3'/> 3.1.3. MySQL 디플로이먼트 생성
 
 
-1. MySql을 디플로이컨트 형식으로 배포하기위해서 workloads > Deployments 버튼을 눌러 접속을 진행한다.
+1. MySql을 디플로이먼트 형식으로 배포하기위해서 workloads > Deployments 버튼을 눌러 접속을 진행한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_13.jpeg)
 
 
