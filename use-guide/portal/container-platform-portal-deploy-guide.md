@@ -517,10 +517,15 @@ spec:
 
 
 
-## <div id='3-3'/> 3.3. 서비스 접속 확인
+## <div id='3-3'/> 3.3. 확인하기
 
-컨테이너 플랫폼 포털에서 배포한 WordPress 접속 방법  
-WordPress 웹사이트 형식이기 때문에 url로 접근해야한다.
+컨테이너 플랫폼 포털에서 배포한 WordPress 접속 방법 
+
+- Services 메뉴의 Services에서 frontend 서비스의 port를 확인한다.
+  
+  <br>
+
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_39.jpeg)
 
 * http://playpark-cp.k-paas.org:{WordPress_node_port} 접속을 확인한다.
    * 예시> http://playpark-cp.k-paas.org:32715
