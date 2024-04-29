@@ -54,6 +54,7 @@
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_2.jpeg)
 
 <br>
+
 ### <div id='3-1-1'/> 3.1.1. 퍼시스턴트 볼륨 생성
 
 MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트볼륨이 필요하다.
