@@ -69,15 +69,6 @@ MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트볼륨이 필요
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_5.jpeg)
 
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_6.jpeg)
-
-
-5. 다음과 같이 퍼시스턴트 볼륨이 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_7.jpeg)
-
-
 MySQL 퍼시스턴트 볼륨을 생성하는 예시 코드이다.  
 기본 스토리지클래스를 사용하여 퍼시스턴트 볼륨을 생성하도록 작성되었다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털털에서 퍼시스턴트 볼륨을 생성한다.
@@ -102,6 +93,16 @@ spec:
 
 ```
 
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_6.jpeg)
+
+
+5. 다음과 같이 퍼시스턴트 볼륨이 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_7.jpeg)
+
+
+
+
 
 ### <div id='3-1-2'/> 3.1.2. 퍼시스턴트 볼륨 클레임 생성
 
@@ -116,16 +117,6 @@ spec:
 3. 퍼시스턴트 볼륨 클레임을 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_10.jpeg)
-
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_11.jpeg)
-
-
-5. 다음과 같이 퍼시스턴트 볼륨이 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_12.jpeg)
-
-
 
 MySQL 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 퍼시스턴트 볼륨 클레임을 생성한다.
@@ -148,6 +139,16 @@ spec:
 ```
 
 
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_11.jpeg)
+
+
+5. 다음과 같이 퍼시스턴트 볼륨 클레임이 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_12.jpeg)
+
+
+
+
 
 ### <div id='3-1-3'/> 3.1.3. MySQL 디플로이먼트 생성
 
@@ -163,15 +164,6 @@ spec:
 3. 디플로이먼트를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_15.jpeg)
-
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_16.jpeg)
-
-
-5. 다음과 같이 디플로이먼트가 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_17.jpeg)
-
 
 MySQL 디플로이먼트를을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 디플로이먼트를 생성한다.
@@ -218,6 +210,16 @@ spec:
           claimName: mysql-pvc
 ```
 
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_16.jpeg)
+
+
+5. 다음과 같이 디플로이먼트가 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_17.jpeg)
+
+
+
+
 
 ### <div id='3-1-4'/> 3.1.4. MySQL 서비스 생성
 
@@ -233,15 +235,6 @@ spec:
 3. 서비스를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_20.jpeg)
-
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_21.jpeg)
-
-
-5. 다음과 같이 서비스가 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_22.jpeg)
-
 
 MySQL 서비스를 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 서비스를 생성한다.
@@ -264,6 +257,16 @@ spec:
     app: wordpress
     tier: mysql
 ```
+
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_21.jpeg)
+
+
+5. 다음과 같이 서비스가 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_22.jpeg)
+
+
+
 <br>
 
 
@@ -283,15 +286,6 @@ spec:
 3. 퍼시스턴트 볼륨을 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_25.jpeg)
-
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_26.jpeg)
-
-
-5. 다음과 같이 퍼시스턴트 볼륨이 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_43.jpeg)
-
 
 WordPress 퍼시스턴트 볼륨을 생성하는 예시 코드이다.  
 기본 스토리지클래스를 사용하여 퍼시스턴트 볼륨을 생성하도록 작성되었다.  
@@ -317,6 +311,16 @@ spec:
 ```
 
 
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_26.jpeg)
+
+
+5. 다음과 같이 퍼시스턴트 볼륨이 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_43.jpeg)
+
+
+
+
 ### <div id='3-2-2'/> 3.2.2. 퍼시스턴트 볼륨 클레임 생성
 
 1. 퍼시스턴트 볼륨 클레임을 배포하기위해 Storage > Persistent Volume Claims 버튼을 눌러 접속을 진행한다.
@@ -330,14 +334,6 @@ spec:
 3. 퍼시스턴트 볼륨 클레임을 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_29.jpeg)
-
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_30.jpeg)
-
-
-5. 다음과 같이 퍼시스턴트 볼륨이 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_31.jpeg)
 
 
 WordPress 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.  
@@ -361,6 +357,15 @@ spec:
 ```
 
 
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_30.jpeg)
+
+
+5. 다음과 같이 퍼시스턴트 볼륨 클레임이 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_31.jpeg)
+
+
+
 ### <div id='3-2-3'/> 3.2.3. WordPress 디플로이먼트 생성
 
 
@@ -375,14 +380,6 @@ spec:
 3. 디플로이먼트를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_34.jpeg)
-
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_35.jpeg)
-
-
-5. 다음과 같이 디플로이먼트가 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_36.jpeg)
 
 
 WordPress 디플로이먼트를 생성하는 예시 코드이다.  
@@ -433,7 +430,15 @@ spec:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: wp-pvc
-```
+```  
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_35.jpeg)
+
+
+5. 다음과 같이 디플로이먼트가 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_36.jpeg)
+
+
 
 ### <div id='3-2-4'/> 3.2.4. WordPress 서비스 생성
 
@@ -449,14 +454,6 @@ spec:
 3. 서비스를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_39.jpeg)
-
-
-4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_40.jpeg)
-
-
-5. 다음과 같이 서비스가 생성된 모습을 확인할 수있다.
-![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_41.jpeg)
 
 
 WordPress 서비스를 노드포트로 생성하는 예시 코드이다.  
@@ -480,10 +477,20 @@ spec:
     tier: frontend
 ```
 
+4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_40.jpeg)
+
+
+5. 다음과 같이 서비스가 생성된 모습을 확인할 수있다.
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_41.jpeg)
+
+
+
 ## <div id='3-3'/> 3.3. 서비스 접속 확인
 
 컨테이너 플랫폼 포털에서 배포한 WordPress 접속 방법  
 * http://playpark-cp.k-paas.org:{WordPress_node_port} 접속을 확인한다.
+* 예시> http://playpark-cp.k-paas.org:32715
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_42.jpeg)
 
 <br>
