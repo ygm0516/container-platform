@@ -60,7 +60,7 @@
 
 <br>
 
-# <div id='1'/> 컨테이너 플랫폼 포털을 사용한 MySQL과 WordPress 배포
+# <div id='3'/> 컨테이너 플랫폼 포털을 사용한 MySQL과 WordPress 배포
 ## <div id='3-1'/> 컨테이너 플랫폼 포털을을 사용한 MySQL 배포
 ### <div id='3-1-1'/> 3.1.1. 퍼시스턴트 볼륨 생성
 
