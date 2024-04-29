@@ -49,7 +49,9 @@
 1. 플레이 파크 포털에 접속해서 로그인을 한다.
       * 플레이 파크 접속 url> http://portal.k-paas.org/
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)
+![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_44.jpeg)
 
+   * 이미지 두개 중에 선택
 3. 로그인에 성공하면 다음과 같은 대시보드가 보여진다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_2.jpeg)
 
