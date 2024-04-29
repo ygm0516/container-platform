@@ -521,7 +521,7 @@ spec:
 
 컨테이너 플랫폼 포털에서 배포한 WordPress 접속 방법 
 
-- Services 메뉴의 Services에서 frontend 서비스의 port를 확인한다.
+- Services 메뉴의 Services에서 WordPress 서비스의 port를 확인한다.
   
   <br>
 
