@@ -528,6 +528,7 @@ WordPress 웹사이트 형식이기 때문에 url로 접근해야한다.
 
 
 
+# <div id='4'/> 4. Redis를 사용한 PHP 방명록 애플리케이션 배포
 ## <div id='4-1'/> 4.1. Redis 생성
 ### <div id='4-1-1'/> 4.1.1. Redis-leader 생성
 #### <div id='4-1-1-1'/> 4.1.1.1. Redis-leader 디플로이먼트 생성
