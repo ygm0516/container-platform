@@ -195,9 +195,9 @@ spec:
         name: mysql
         env:
          - name: MYSQL_DATABASE
-              value: wordpress
-          - name: MYSQL_ROOT_PASSWORD
-              value: password
+           value: wordpress
+         - name: MYSQL_ROOT_PASSWORD
+           value: password
         ports:
         - containerPort: 3306
           name: mysql
@@ -208,6 +208,7 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pvc
+
 ```
 
 4. 코드에 문제가 없다면 정상적으로 처리되었다는 팝업창이 뜬다.
