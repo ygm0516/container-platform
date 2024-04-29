@@ -726,7 +726,7 @@ spec:
 ## <div id='4-2'/> 4.2. 방명록 프론트엔드 생성
 #### <div id='-2-1'/> 4.2.1. frontend 디플로이먼트 생성
 
-- Workloads 메뉴의 Deployment 클릭한 후 생성 버튼을 클릭한다.
+- Workloads 메뉴의 Deployments 클릭한 후 생성 버튼을 클릭한다.
   ![IMG_3_1]
   
 <br>
