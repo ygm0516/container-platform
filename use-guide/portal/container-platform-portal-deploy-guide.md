@@ -1005,25 +1005,25 @@ spec:
 ## <div id='5-3'/> 5.3. 플레이파크 컨테이너 플랫폼 포털을 사용한 redis 삭제
 
 ### <div id='5-3'/> 5.3. Redis-leader 삭제하기
-#### <div id='5-3-1'/> 5.3.1. Redis-leader Service 삭제하기
+#### <div id='5-3-1'/> 5.3.1. Redis-leader 서비스 삭제하기
 
 - Services메뉴에서 Services를 선택한 후 redis-leader를 클릭한다.
   <br>
   ![IMG_9_1]
   
   <br>
-- 화면 하단의 삭제 버튼을 클릭하여 redis-leader service를 삭제한다.
+- 화면 하단의 삭제 버튼을 클릭하여 redis-leader 서비스를 삭제한다.
   <br>
   ![IMG_9_2]
 
 
   <br>
-- List에서 redis-leader service가 삭제되었는지 확인한다.
+- List에서 redis-leader 서비스가 삭제되었는지 확인한다.
   <br>
   ![IMG_9_5]
 <br>
 
-#### <div id='5-3-2'/> 5.3.2. Redis-leader Deployment 삭제하기
+#### <div id='5-3-2'/> 5.3.2. Redis-leader 디플로이먼트트 삭제하기
 
 -  Workloads메뉴에서 Deployment를 선택한 후 redis-leader를 클릭한다.
   ![IMG_10_1]
