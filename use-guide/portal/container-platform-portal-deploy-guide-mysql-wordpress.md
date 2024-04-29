@@ -506,7 +506,7 @@ spec:
    * 일반적으로 삭제는 배포 순서의 반대로 진행한다.
 
 ## <div id='4-1-1'/>4.1.1 WordPress 서비스 삭제
-1. Services > Services를 클릭해서 Service목록으로 이동한다. 
+1. Services > Services를 클릭해서 Service 목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-17.jpeg)
 
 
@@ -525,7 +525,7 @@ spec:
 
 
 ## <div id='4-1-2'/>4.1.2 WordPress 디플로이먼트 삭제
-1. Workloads > Deployments 클릭해서 Deployments 목록으로 이동한다. 
+1. Workloads > Deployments 클릭해서 Deployment 목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-20.jpeg)
 
 
@@ -587,7 +587,7 @@ spec:
    * 일반적으로 삭제는 배포 순서의 반대로 진행한다.
 
 ## <div id='4-2-1'/>4.2.1 MySQL 서비스 삭제
-1. Services > Services를 클릭해서 Service목록으로 이동한다. 
+1. Services > Services를 클릭해서 Service 목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-1.jpeg)
 
 
@@ -606,7 +606,7 @@ spec:
 
 
 ## <div id='4-2-2'/>4.2.2 MySQL 디플로이먼트 삭제
-1. Workloads > Deployments 클릭해서 Deployments 목록으로 이동한다. 
+1. Workloads > Deployments 클릭해서 Deployment 목록으로 이동한다. 
 ![image](../images/mysql-wordpress-delete-img/delete-img-5.jpeg)
 
 
