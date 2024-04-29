@@ -38,7 +38,7 @@
 
 MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트볼륨이 필요하다.
 
-1. 포털 접속을 성공한 이후에 퍼시스턴트 볼륨을 배포하기위해 Storage > Persistenct Volumes 버튼을 눌러 접속을 진행한다.
+1. 포털 접속을 성공한 이후에 퍼시스턴트 볼륨을 배포하기위해 Storage > Persistent Volumes 버튼을 눌러 접속을 진행한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_3.jpeg)
 
 2. "생성" 버튼을 클릭할 시 퍼시스턴트 볼륨 생성창이 뜬다.
@@ -84,7 +84,7 @@ spec:
 
 ### <div id='3-1-2'/> 3.1.2. 퍼시스턴트 볼륨 클레임 생성
 
-1. 퍼시스턴트 볼륨 클레임을 배포하기위해 Storage > Persistenct Volume Claims 버튼을 눌러 접속을 진행한다.
+1. 퍼시스턴트 볼륨 클레임을 배포하기위해 Storage > Persistent Volume Claims 버튼을 눌러 접속을 진행한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_8.jpeg)
 
 
@@ -251,7 +251,7 @@ spec:
 
 ### <div id='3-2-1'/> 3.2.1. 퍼시스턴트 볼륨 생성
 
-1. 포털에 접속을 성공한 이후에 퍼시스턴트 볼륨을 배포하기위해 Storage > Persistenct Volumes 버튼을 눌러 접속을 진행한다.
+1. 포털에 접속을 성공한 이후에 퍼시스턴트 볼륨을 배포하기위해 Storage > Persistent Volumes 버튼을 눌러 접속을 진행한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_23.jpeg)
 
 
@@ -298,7 +298,7 @@ spec:
 
 ### <div id='3-2-2'/> 3.2.2. 퍼시스턴트 볼륨 클레임 생성
 
-1. 퍼시스턴트 볼륨 클레임을 배포하기위해 Storage > Persistenct Volume Claims 버튼을 눌러 접속을 진행한다.
+1. 퍼시스턴트 볼륨 클레임을 배포하기위해 Storage > Persistent Volume Claims 버튼을 눌러 접속을 진행한다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_27.jpeg)
 
 
