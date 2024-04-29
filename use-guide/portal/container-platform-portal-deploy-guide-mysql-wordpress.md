@@ -513,7 +513,7 @@ spec:
 
 
 ## <div id='4-1-3'/>4.1.3 WordPress 퍼시스턴트 볼륨 클레임 삭제
-1. Persistent Volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+1. Storage > Persistent Volume Claims 클릭해서 Persistent Volume Claim 목록으로 이동한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-24.jpeg)
 
 
@@ -533,7 +533,7 @@ spec:
 
 
 ## <div id='4-1-4'/>4.1.4 WordPress 퍼시스턴트 볼륨 삭제
-1. Persistent Volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+1. Storage > Persistent Volumes 클릭해서 Persistent Volume 목록으로 이동한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-28.jpeg)
 
 
@@ -594,7 +594,7 @@ spec:
 
 
 ## <div id='4-2-3'/>4.2.3 MySQL 퍼시스턴트 볼륨 클레임 삭제
-1. Persistent Volume 목록에서 삭제할 디플로이먼트를 클릭하여 상세 페이지로 이동한다.
+1. Storage > Persistent Volumes Claims 클릭해서 Persistent Volume Claim 목록으로 이동한다.
 ![image](../images/mysql-wordpress-delete-img/delete-img-9.jpeg)
 
 
