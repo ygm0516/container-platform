@@ -496,8 +496,10 @@ spec:
 ## <div id='3-3'/> 3.3. 서비스 접속 확인
 
 컨테이너 플랫폼 포털에서 배포한 WordPress 접속 방법  
+WordPress 웹사이트 형식이기 때문에 url로 접근해야한다.
+
 * http://playpark-cp.k-paas.org:{WordPress_node_port} 접속을 확인한다.
-* 예시> http://playpark-cp.k-paas.org:32715
+   * 예시> http://playpark-cp.k-paas.org:32715
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_42.jpeg)
 
 <br>
