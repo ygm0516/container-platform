@@ -44,7 +44,7 @@ MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트볼륨이 필요
 2. "생성" 버튼을 클릭할 시 퍼시스턴트 볼륨 생성창이 뜬다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_4.jpeg)
 
-3. 퍼시스턴트 볼륨을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 퍼시스턴트 볼륨을 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_5.jpeg)
 
@@ -92,7 +92,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_9.jpeg)
 
 
-3. 퍼시스턴트 볼륨 클레임을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 퍼시스턴트 볼륨 클레임을 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_10.jpeg)
 
@@ -139,7 +139,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_14.jpeg)
 
 
-3. 디플로이먼트를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 디플로이먼트를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_15.jpeg)
 
@@ -209,7 +209,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_19.jpeg)
 
 
-3. 서비스를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 서비스를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_20.jpeg)
 
@@ -259,7 +259,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_24.jpeg)
 
 
-3. 퍼시스턴트 볼륨을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 퍼시스턴트 볼륨을 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_25.jpeg)
 
@@ -306,7 +306,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_28.jpeg)
 
 
-3. 퍼시스턴트 볼륨 클레임을 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 퍼시스턴트 볼륨 클레임을 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_29.jpeg)
 
@@ -351,7 +351,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_33.jpeg)
 
 
-3. 디플로이먼트를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 디플로이먼트를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_34.jpeg)
 
@@ -425,7 +425,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_38.jpeg)
 
 
-3. 서비스를 생성할 네임스페이스를 선택한 후 코드를 작성한다.
+3. 서비스를 생성하는 코드를 작성한다.
    * 작성을 마치면 "저장" 버튼을 누른다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_39.jpeg)
 
