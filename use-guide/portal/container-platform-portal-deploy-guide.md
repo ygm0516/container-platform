@@ -824,7 +824,7 @@ spec:
 
 <br>
   
-* http://playpark-cp.k-paas.org:{WordPress_node_port} 접속을 확인한다.
+* http://playpark-cp.k-paas.org:{frontend_Node_port} 접속을 확인한다.
    * 예시> http://playpark-cp.k-paas.org:30705
 
 
