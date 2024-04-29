@@ -103,7 +103,7 @@ MySQL 퍼시스턴트 볼륨을 생성하는 예시 코드이다.
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 퍼시스턴트 볼륨을 생성한다.
 
 
-#### Mysql Persistenct Volume
+#### Mysql Persistent Volume
 ```bash
 
 kind: PersistentVolume
@@ -151,7 +151,7 @@ spec:
 MySQL 퍼시스턴트 볼륨 클레임을 생성하는 예시 코드이다.  
 다음 코드를 참고하여 컨테이너 플랫폼 포털에서 퍼시스턴트 볼륨 클레임을 생성한다.
 
-#### Mysql Persistenct Volume Claim
+#### Mysql Persistent Volume Claim
 ```bash
 
 kind: PersistentVolumeClaim
