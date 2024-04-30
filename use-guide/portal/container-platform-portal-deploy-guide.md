@@ -72,6 +72,7 @@
 ## <div id='2-1'/>2.1. 플레이파크 컨테이너 플랫폼 포털 접속
 1. 플레이 파크 포털에 접속해서 로그인을 한다.
       * 플레이 파크 접속 url
+         * <a href="http://portal.k-paas.org" target="_blank">http://portal.k-paas.org</a> 
          * <button onclick="window.open('http://portal.k-paas.org')">http://portal.k-paas.org </button>
 <!--![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)-->
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_44.jpeg)
