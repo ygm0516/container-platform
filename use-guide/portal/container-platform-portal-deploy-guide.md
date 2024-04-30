@@ -2,7 +2,6 @@
 
 
 # Playpark 컨테이너 플랫폼 포털 배포 가이드
-[새 탭에서 열기](https://www.google.com/) {:target="_blank"}
 ## 목차 
 1. [문서 개요](#1)
     * [1.1. 목적](#1-1)
@@ -71,7 +70,7 @@
 
 ## <div id='2-1'/>2.1. 플레이파크 컨테이너 플랫폼 포털 접속
 1. 플레이 파크 포털에 접속해서 로그인을 한다.
-      * <a href="http://portal.k-paas.org" target="_blank">‘플레이 파크 포털 접속’</a>
+      * <a href="http://portal.k-paas.org" target="_blank">http://portal.k-paas.org</a>
 <!--![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)-->
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_44.jpeg)
    
