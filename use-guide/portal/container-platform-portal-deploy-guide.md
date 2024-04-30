@@ -71,9 +71,7 @@
 
 ## <div id='2-1'/>2.1. 플레이파크 컨테이너 플랫폼 포털 접속
 1. 플레이 파크 포털에 접속해서 로그인을 한다.
-         [링크이름](https://www.google.co.kr/){:target="_blank"}
-      *  <a href="http://portal.k-paas.org" target="_blank"> http://portal.k-paas.org </a>
-         * <button onclick="window.open('http://portal.k-paas.org')">http://portal.k-paas.org </button>
+        http://portal.k-paas.org
 <!--![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)-->
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_44.jpeg)
    
@@ -528,7 +526,7 @@ spec:
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_39.jpeg)
 
 * http://playpark-cp.k-paas.org:{WordPress_node_port} 접속을 확인한다.
-   * 예시> http://playpark-cp.k-paas.org:32715
+  '''예시> http://playpark-cp.k-paas.org:32715
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_42.jpeg)
 
 
