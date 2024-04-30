@@ -524,9 +524,8 @@ spec:
 
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_39.jpeg)
 
-* <k>http://</k>playpark-cp.k-paas.org:{WordPress_node_port} 접속을 확인한다.
-
-      * 예시: http://playpark-cp.k-paas.org:32715
+* <k>http://</k>playpark-cp.k-paas.org:{WordPress_node_port} 접속을 확인한다.  
+         * 예시: http://playpark-cp.k-paas.org:32715
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_42.jpeg)
 
 
@@ -827,9 +826,8 @@ spec:
 
 <br>
   
-* <k>http://</k>playpark-cp.k-paas.org:{frontend_Node_port} 접속을 확인한다.
-
-      * 예시: http://playpark-cp.k-paas.org:30705
+* <k>http://</k>playpark-cp.k-paas.org:{frontend_Node_port} 접속을 확인한다.  
+         * 예시: http://playpark-cp.k-paas.org:30705
 
 
 <br>
