@@ -73,7 +73,7 @@
 1. 플레이 파크 포털에 접속해서 로그인을 한다.
       * 플레이 파크 접속 url
          * [플레이파크](http://portal.k-paas.org) {:target="_blank"}
-         * <a href="http://portal.k-paas.org" target="_blank">http://portal.k-paas.org</a> 
+         * <a href="http://portal.k-paas.org" target="_blank"> 플레이 파크 접속 </a>
          * <button onclick="window.open('http://portal.k-paas.org')">http://portal.k-paas.org </button>
 <!--![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)-->
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_44.jpeg)
