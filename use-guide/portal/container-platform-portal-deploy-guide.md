@@ -1,7 +1,7 @@
 ### [Index](https://github.com/K-PaaS/container-platform/blob/playpark/README.md) > [CP Use](../Readme.md) >  Playpark 컨테이너 플랫폼 포털 사용자 가이드
 
 
-# Playpark 컨테이너 플랫폼 포털 사용자 가이드
+# Playpark 컨테이너 플랫폼 포털 배포 가이드
 
 ## 목차 
 1. [문서 개요](#1)
@@ -9,19 +9,19 @@
     * [1.2. 범위](#1-2)
 2. [컨테이너 플랫폼 포털 접속](#2)
     * [2.1. 컨테이너 플랫폼 포털 접속](#2-1)
-3. [컨테이너 플랫폼 포털을 사용한 MySQL과 WordPress 배포](#3)
-    * [3.1.컨테이너 플랫폼 포털을 사용한 MySQL 배포](#3-1)
+3. [(예제)컨테이너 플랫폼 포털을 사용한 MySQL과 WordPress 배포 : Stateful](#3)
+    * [3.1. MySQL 배포](#3-1)
     * [3.1.1. 퍼시스턴트 볼륨 생성](#3-1-1)
     * [3.1.2. 퍼시스턴트 볼륨 클레임 생성](#3-1-2)
     * [3.1.3. MySQL 디플로이먼트 생성](#3-1-3)
     * [3.1.4. MySQL 서비스 생성](#3-1-4)
-    * [3.2. 컨테이너 플랫폼 포털을 사용한 WordPress 배포](#3-2)
+    * [3.2. WordPress 배포](#3-2)
     * [3.2.1. 퍼시스턴트 볼륨 배포](#3-2-1)
     * [3.2.2. 퍼시스턴트 볼륨 클레임 배포](#3-2-2)
     * [3.2.3. WordPress 디플로이먼트 생성](#3-2-3)
     * [3.2.4. WordPress 서비스 생성](#3-3)
     * [3.3. 배포 확인](#3-3)
-4. [컨테이너 플랫폼 포털을 사용한 Redis와 PHP 방명록 애플리케이션 배포](#4)
+4. [(예제)컨테이너 플랫폼 포털을 사용한 Redis와 PHP 방명록 애플리케이션 배포 : StateLess](#4)
    * [4.1 Redis 생성 ](#4-1)
    * [4.1.1 Redis-leader 생성 ](#4-1-1)
    * [4.1.1.1 Redis-leader 디플로이먼트 생성 ](#4-1-1-1)
@@ -61,7 +61,7 @@
 본 문서는 플레이파크를 사용하여 서비스를 배포하는 방법에 대해 기술한다.
 
 ## <div id='1-2'/> 1.2. 범위
-플레이파크를 사용하여 MySQl과 WordPress를 퍼시스턴트 볼륨으로 배포하는 방법과 Redis와 PHP 방명록 애플리케이션 배포하는 방법에 대해 작성되었다.
+플레이파크를 사용하여 MySQL과 WordPress를 퍼시스턴트 볼륨으로 배포하는 방법과 Redis와 PHP 방명록 애플리케이션 배포하는 방법에 대해 작성되었다.
    * MySQL과 WordPress를 퍼시스턴트 볼륨으로 배포하는 방법
    * Redis와 PHP 방명록 애플리케이션 배포하는 방법
 
@@ -71,19 +71,18 @@
 
 ## <div id='2-1'/>2.1. 플레이파크 컨테이너 플랫폼 포털 접속
 1. 플레이 파크 포털에 접속해서 로그인을 한다.
-      * 플레이 파크 접속 url> http://portal.k-paas.org/
+      * 플레이 파크 접속 url
+         * <button onclick="window.open(' http://portal.k-paas.org ')"> http://portal.k-paas.org </button>
 <!--![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_1.jpeg)-->
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_44.jpeg)
-
-   * 이미지 두개 중에 선택
    
 3. 로그인에 성공하면 다음과 같은 대시보드가 보여진다.
 ![image](../images/mysql-wordpress-deploy-img/playpark_portal_guide_img_2.jpeg)
 
 <br>
 
-# <div id='3'/> 3. 컨테이너 플랫폼 포털을 사용한 MySQL과 WordPress 배포
-## <div id='3-1'/> 3.1. 컨테이너 플랫폼 포털을 사용한 MySQL 배포
+# <div id='3'/> 3. (예제)컨테이너 플랫폼 포털을 사용한 MySQL과 WordPress 배포 : Stateful
+## <div id='3-1'/> 3.1. MySQL 배포
 ### <div id='3-1-1'/> 3.1.1. 퍼시스턴트 볼륨 생성
 
 MySQL은 각 데이터를 저장하기 위해서 퍼시스턴트 볼륨이 필요하다.
@@ -300,7 +299,7 @@ spec:
 <br>
 
 
-## <div id='3-2'/>3.2. 컨테이너 플랫폼 포털을 사용한 WordPress 배포
+## <div id='3-2'/>3.2. WordPress 배포
 
 ### <div id='3-2-1'/> 3.2.1. 퍼시스턴트 볼륨 생성
 
@@ -533,7 +532,7 @@ spec:
 
 
 
-# <div id='4'/> 4. 컨테이너 플랫폼 포털을 사용한 Redis와 PHP 방명록 애플리케이션 배포
+# <div id='4'/> 4. (예제)컨테이너 플랫폼 포털을 사용한 Redis와 PHP 방명록 애플리케이션 배포 : StateLess
 ## <div id='4-1'/> 4.1. Redis 생성
 ### <div id='4-1-1'/> 4.1.1. Redis-leader 생성
 #### <div id='4-1-1-1'/> 4.1.1.1. Redis-leader 디플로이먼트 생성
