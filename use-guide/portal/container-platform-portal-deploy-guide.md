@@ -62,7 +62,7 @@
 
 ## <div id='1-2'/> 1.2. 범위
 플레이파크를 사용하여 MySQl과 WordPress를 퍼시스턴트 볼륨으로 배포하는 방법과 Redis와 PHP 방명록 애플리케이션 배포하는 방법에 대해 작성되었다.
-   * MySQl과 WordPress를 퍼시스턴트 볼륨으로 배포하는 방법
+   * MySQL과 WordPress를 퍼시스턴트 볼륨으로 배포하는 방법
    * Redis와 PHP 방명록 애플리케이션 배포하는 방법
 
 <br>
