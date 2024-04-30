@@ -1008,7 +1008,7 @@ spec:
 
 
 ## <div id='5-3'/> 5.3. 컨테이너 플랫폼 포털을 사용한 Redis-leader 삭제
-#### <div id='5-3-1'/> 5.3.1. Redis-leader 서비스 삭제
+### <div id='5-3-1'/> 5.3.1. Redis-leader 서비스 삭제
 
 - Services메뉴에서 Services를 선택한 후 redis-leader를 클릭한다.
   <br>
@@ -1026,7 +1026,7 @@ spec:
   ![IMG_9_5]
 <br>
 
-#### <div id='5-3-2'/> 5.3.2. Redis-leader 디플로이먼트 삭제
+### <div id='5-3-2'/> 5.3.2. Redis-leader 디플로이먼트 삭제
 
 -  Workloads메뉴에서 Deployment를 선택한 후 redis-leader를 클릭한다.
   ![IMG_10_1]
@@ -1046,8 +1046,8 @@ spec:
 
 <br>
 
-### <div id='5-4'/> 5.4. 컨테이너 플랫폼 포털을 사용한 Redis-follower 삭제
-#### <div id='5-4-1'/> 5.4.1. Redis-follower 서비스 삭제하기
+## <div id='5-4'/> 5.4. 컨테이너 플랫폼 포털을 사용한 Redis-follower 삭제
+### <div id='5-4-1'/> 5.4.1. Redis-follower 서비스 삭제하기
 
 - Services메뉴에서 Services를 선택한 후 redis-follower를 클릭한다.
   <br>
@@ -1065,7 +1065,7 @@ spec:
 
 <br>
 
-#### <div id='5-4-2'/> 5.4.2. Redis-follower 디플로이먼트 삭제하기
+### <div id='5-4-2'/> 5.4.2. Redis-follower 디플로이먼트 삭제하기
 
 -  Workloads메뉴에서 Deployment를 선택한 후 redis-follower를 클릭한다.
    <br>
@@ -1086,8 +1086,8 @@ spec:
 
 <br>
 
-### <div id='5-5'/> 5.5. 컨테이너 플랫폼 포털을 사용한 frontend 삭제
-#### <div id='5-5-1'/> 5.5.1. frontend 서비스 삭제하기
+## <div id='5-5'/> 5.5. 컨테이너 플랫폼 포털을 사용한 frontend 삭제
+### <div id='5-5-1'/> 5.5.1. frontend 서비스 삭제하기
 
 - Services메뉴에서 Services를 선택한 후 frontend를 클릭한다.
   <br>
@@ -1104,7 +1104,7 @@ spec:
   ![IMG_13_5]
   <br>
 
-#### <div id='5-5-2'/> 5.5.2. frontend 디플로이먼트 삭제
+### <div id='5-5-2'/> 5.5.2. frontend 디플로이먼트 삭제
 
 -  Workloads메뉴에서 Deployment를 선택한 후 frontend를 클릭한다.
   ![IMG_14_1]
