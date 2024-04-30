@@ -1,4 +1,5 @@
-### [Index](https://github.com/K-PaaS/container-platform/blob/playpark/README.md) > [CP Use](../Readme.md) >  Playpark 컨테이너 플랫폼 포털 사용자 가이드
+### [Index](https://github.com/K-PaaS/container-platform/blob/playpark/README.md) > [CP Use](../Readme.md) >  Playpark 컨테이너 플랫폼 포털 배포 가이드
+
 
 
 # Playpark 컨테이너 플랫폼 포털 배포 가이드
