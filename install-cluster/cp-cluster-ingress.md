@@ -149,12 +149,3 @@ $ curl http://115.68.198.68
 </body>
 </html>
 ```
---> 인터넷 창에 생성한 ingressIP의 floatingIP값 넣어보기 
-
-##### 연결된 플로팅 ip의 nip.io로 호스트 도메인 값 입력
-HOST_DOMAIN="115.68.198.68.nip.io"
-
-외부망에서는 floating ip를 붙여야하고 내부망에서는 floating ip를 붙이지 않아도 되었는데 그 이유
-(예측임)
-1) 외부망에서는 IaaS가 openstack이고 내부망에서는 vsphere여서 즉 두개의 IaaS환경이 다르기 때문에(이게 말이되나)
-2) 외부망에서는 floating ip를 붙이지 않으면 연결, 접속이 불가능한데 내부망에서는 floating ip를 붙이지 않아도 연결 접속이 가능하기때문에
