@@ -140,7 +140,7 @@ ingress-nginx-controller-admission   ClusterIP      10.233.46.27    <none>      
 
 ##### 연결된 플로팅 ip로 외부에서 curl 통신, 404 에러 반환 시 정상 
 ```
-$ curl http://115.68.198.68
+$ curl http://[public ip]
 <html>
 <head><title>404 Not Found</title></head>
 <body>
