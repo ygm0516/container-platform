@@ -1,2 +1,1 @@
-# container-platform-portal
-container-platform-portal-guide. 생성
+개인 공부,...;;
