@@ -127,7 +127,7 @@ cluster3   Ready    <none>          70s   v1.28.6     #Worker Node 추가 확인
 ```
 ## <div id='1-6'/> 1.6. NFS 스토리지 사용 시 설정 추가
 
-NFS 스토리지를 사용하신 경우, 신규 Worker 노드에 대한 설정을 추가
+NFS 스토리지를 사용하신 경우, 신규 Worker 노드에 대한 설정을 추가 <br/>
 https://github.com/K-PaaS/container-platform/blob/master/install-guide/nfs-server-install-guide.md
 
 # <div id='2'/> 2. Worker 노드 삭제
