@@ -96,7 +96,8 @@ nhn-kpaas-cluster-default-worker-node-0   1173m        29%    10609Mi         66
 ```
 ## <span id='3'> 3. scale out
 ### <span id='3.1'> 3.1. NHN cluster scale out
-> nhn cluster node scale out 확인
+> nhn cluster node spec 변경 가능
+
 ```bash
 
 ```
@@ -106,7 +107,6 @@ nhn-kpaas-cluster-default-worker-node-0   1173m        29%    10609Mi         66
  >naver cloud 환경에서 기존에 사용하던 노드(IP)변경없이 scale out은 불가능함을 확인 <br>
  >따라서 변경할 스펙으로 노드를 추가한다음 기존에 사용중인 노드를 삭제해도 멀티 클러스터가 정상적으로 작동하는지를 확인하는 절차를 진행한다.
 
- 
 ### <span id='3.2.1'> 3.2.1 node(1/2) scale out
 ### <span id='3.2.2'> 3.2.2 정상 작동 확인
 ### <span id='3.2.3'> 3.2.3 node(2/2) scale out

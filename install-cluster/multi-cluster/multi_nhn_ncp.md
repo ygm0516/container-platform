@@ -36,7 +36,7 @@
 <br>
 
 ### <span id='1.2'>1.2. 범위
-`CSP 쿠버네티스 서비스` 클러스터를 대상으로 Istio를 이용하여 `멀티 클러스터`를 구성하도록 작성하였다.
+`CSP 쿠버네티스 서비스` 클러스터를 대상으로 Istio를 이용하여 `멀티 클러스터`를 구성하도록 작성하였다.<br>
 본 문서에서는 `nhn cloud`와 `naver cloud` 환경을 사용하여 구성하는 방법을 작성하였다.
 
 <br>
@@ -97,7 +97,6 @@ IaaS Security Group의 열어줘야할 Port를 설정한다.
 
 
 <br>
-<br>
 
 
 ### <span id='2.4'>2.4. 시연 클러스터 환경
@@ -107,8 +106,7 @@ Istio를 활용하여 **`2개의 클러스터`** 를 기반으로 멀티 클러�
 | Kubernetes Service | Version |CNI| Server Image |
 | --- | --- | --- | --- |
 | Ncloud Kubernetes Service (NKS) | v1.28.10 |Cilium| Ubuntu 22.04 |
-| NHN kubernetes Service (NKS) | v1.30.3 |Calico| Ubuntu 22.04 |
-
+| NHN kubernetes Service (NKS) | v1.32.3 |Calico| Ubuntu 22.04 |
 
 <br>
 
@@ -167,8 +165,6 @@ $ cd ~/workspace/container-platform/cp-portal-deployment/istio_mc
 $ chmod +x install_tools.sh
 $ ./install_tools.sh
 ```
-
-
 
 <br>
 
@@ -233,8 +229,25 @@ cilium-sqps5   1/1     Running   0          4m32s
 ## <span id='4'>4. Istio 멀티 클러스터 구성
 >  Istio를 활용하여 **`2개의 클러스터`** 를 기반으로 멀티 클러스터 환경을 구성하는 예제를 제공한다.
 
+<br>
 
+>ncloud 확인 사항<br>
+ - 메인 계정으로 인스턴스 생성 시 root, 서브 계정으로 인스턴스 생성 시 ncloud 계정을 기본으로 사용한다. 
+    - 멀티 구성의 경우 각 vm에 설치하는 과정에서 동일한 계정이 존재하지 않으면 정상적으로 설치가 진행되지 않는다.
+      - vm에 미리 동일한 계정을 생성해준다.
+      - ex ) ubuntu -> ubuntu / ncloud -> ncloud
+    -  sudo 실행 권한 확인
+  
+```bash
+#계정 생성
+$ sudo useradd -m -s /bin/bash ubuntu
+$ echo "ubuntu ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 
+$ sudo mkdir -p /home/ubuntu/.ssh
+$ sudo ssh-keygen -t rsa -m PEM -N '' -f /home/ubuntu/.ssh/id_rsa
+$ sudo cat /home/ubuntu/.ssh/id_rsa.pub | sudo tee -a /home/ubuntu/.ssh/authorized_keys
+$ sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+```
 ### <span id='4.1'>4.1. 멀티 클러스터 접근 구성
 Istio 멀티 클러스터 구성은 `kubectl config get-contexts` 명령어로 출력된 컨텍스트 목록을 기반으로 진행된다.<br>
 따라서 각 클러스터에 접근할 수 있도록 컨텍스트를 미리 구성해야 한다.<br>
