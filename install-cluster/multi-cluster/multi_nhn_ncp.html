@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>multi_nhn_ncp.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="csp-%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%EC%84%9C%EB%B9%84%EC%8A%A4-istio-%EB%A9%80%ED%8B%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%84%B1-%EA%B0%80%EC%9D%B4%EB%93%9Cnaver-nhn">CSP 쿠버네티스 서비스 Istio 멀티 클러스터 구성 가이드(NAVER-NHN)</h2>
+<br>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1">문서 개요</a><br>
+1.1. <a href="#1.1">목적</a><br>
+1.2. <a href="#1.2">범위</a><br>
+1.3. <a href="#1.3">시스템 구성도</a><br>
+1.4. <a href="#1.4">참고 자료</a></li>
+<li><a href="#2">정보</a><br>
+2.1. <a href="#2.1">Prerequisite</a><br>
+2.2. <a href="#2.2">설치 목록</a><br>
+2.3. <a href="#2.3">방화벽 정보</a><br>
+2.4. <a href="#2.4">시연 클러스터 환경</a></li>
+<li><a href="#3">컨테이너 플랫폼 포털 배포 시 사전 설정</a><br>
+3.1. <a href="#3.1">Deployment 파일 다운로드</a><br>
+3.2. <a href="#3.2">도구 설치</a><br>
+3.3. <a href="#3.3">StorageClass 설정</a><br>
+3.4. <a href="#3.4">Metrics Server 설치</a><br>
+3.5. <a href="#3.5">Cilium CNI 사용 클러스터 설정 변경</a></li>
+<li><a href="#4">Istio 멀티 클러스터 구성</a><br>
+4.1. <a href="#4.1">멀티 클러스터 접근 구성</a><br>
+4.2. <a href="#4.2">Istio 멀티 클러스터 구성 스크립트 실행</a></li>
+<li><a href="#5">샘플 애플리케이션 배포</a><br>
+5.1. <a href="#5.1">멀티 클러스터 샘플 애플리케이션 배포</a><br>
+5.2. <a href="#5.2">멀티 클러스터 통신 테스트</a></li>
+<li><a href="#6">Istio 멀티 클러스터 구성 삭제</a></li>
+</ol>
+<br>
+<h2 id="span-id1-1-%EB%AC%B8%EC%84%9C-%EA%B0%9C%EC%9A%94"><span id='1'> 1. 문서 개요</h2>
+<h3 id="span-id11-11-%EB%AA%A9%EC%A0%81"><span id='1.1'> 1.1. 목적</h3>
+<p>본 문서(<code>CSP 쿠버네티스 서비스 Istio 멀티 클러스터 구성 가이드</code>)는 클라우드 서비스 제공업체의 Kubernetes 서비스에 Istio 멀티 클러스터 구성 방법을 기술하여 독립적인 Kubernetes 클러스터의 서비스 간 통신이 가능하도록 하는 방법을 기술한다.</p>
+<br>
+<h3 id="span-id1212-%EB%B2%94%EC%9C%84"><span id='1.2'>1.2. 범위</h3>
+<p><code>CSP 쿠버네티스 서비스</code> 클러스터를 대상으로 Istio를 이용하여 <code>멀티 클러스터</code>를 구성하도록 작성하였다.<br>
+본 문서에서는 <code>nhn cloud</code>와 <code>naver cloud</code> 환경을 사용하여 구성하는 방법을 작성하였다.</p>
+<br>
+<h3 id="span-id1313-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%84%B1%EB%8F%84"><span id='1.3'>1.3. 시스템 구성도</h3>
+<p>시스템 구성은 서로 다른 네트워크인 N개의 Kubernetes 클러스터에 Istio Control Plane을 설치하여 Istio Mesh를 구성한다.<br>
+클러스터 cluster N의 기본 네트워크는 network N으로 설정되며 클러스터 Pod 간의 직접적인 통신 없이 Istio Gateway를 통해 클러스터는 통신한다.</p>
+<blockquote>
+<p><em>이미지 출처</em> <br>
+<a href="https://istio.io/latest/docs/setup/install/multicluster/multi-primary_multi-network/">Install Multi-Primary on different networks</a><br></p>
+</blockquote>
+<img src="https://istio.io/latest/docs/setup/install/multicluster/multi-primary_multi-network/arch.svg" width="800">
+<br>
+<h3 id="span-id1414-%EC%B0%B8%EA%B3%A0-%EC%9E%90%EB%A3%8C"><span id='1.4'>1.4. 참고 자료</h3>
+<blockquote>
+<p><a href="https://istio.io/latest/docs/setup/install/multicluster/multi-primary_multi-network/">Istio Install Multi-Primary on different networks</a><br></p>
+</blockquote>
+<br>
+<h2 id="span-id2-2-%EC%A0%95%EB%B3%B4"><span id='2'> 2. 정보</h2>
+<h3 id="span-id2121-prerequisite"><span id='2.1'>2.1. Prerequisite</h3>
+<ul>
+<li>작업 인스턴스는 <strong>Ubuntu 22.04</strong> 환경에서 진행하는 것을 기준으로 한다.</li>
+<li>각 클러스터는 <strong>로드 밸런서(LoadBalancer)</strong> 유형의 서비스 지원이 필요하다.</li>
+</ul>
+<br>
+<h3 id="span-id2222-%EC%84%A4%EC%B9%98-%EB%AA%A9%EB%A1%9D"><span id='2.2'>2.2. 설치 목록</h3>
+<p>설치되는 도구 목록은 아래와 같다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">도구</th>
+<th style="text-align:center">버전</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">kubectl</td>
+<td style="text-align:center">v1.30.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Helm</td>
+<td style="text-align:center">v3.14.2</td>
+</tr>
+<tr>
+<td style="text-align:center">step</td>
+<td style="text-align:center">0.24.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Podman</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">ca-certificates</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">Istio</td>
+<td style="text-align:center">1.24.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Istio 버전</th>
+<th style="text-align:center"><a href="https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases">Kubernetes 지원 버전</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>1.24</code></td>
+<td style="text-align:center">1.28, 1.29, 1.30, 1.31</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3 id="span-id2323-%EB%B0%A9%ED%99%94%EB%B2%BD-%EC%A0%95%EB%B3%B4"><span id='2.3'>2.3. 방화벽 정보</h3>
+<p>IaaS Security Group의 열어줘야할 Port를 설정한다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">프로토콜</th>
+<th style="text-align:center">포트</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">15021</td>
+<td>Istio ingressgateway status</td>
+</tr>
+<tr>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">80</td>
+<td>Istio ingressgateway http</td>
+</tr>
+<tr>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">443</td>
+<td>Istio ingressgateway https</td>
+</tr>
+<tr>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">31400</td>
+<td>Istio ingressgateway tcp</td>
+</tr>
+<tr>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">15443</td>
+<td>Istio ingressgateway mtls</td>
+</tr>
+<tr>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">15012</td>
+<td>Istio ingressgateway istiod</td>
+</tr>
+<tr>
+<td style="text-align:center">TCP</td>
+<td style="text-align:center">15017</td>
+<td>Istio ingressgateway webhook</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h3 id="span-id2424-%EC%8B%9C%EC%97%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%ED%99%98%EA%B2%BD"><span id='2.4'>2.4. 시연 클러스터 환경</h3>
+<p>Istio를 활용하여 <strong><code>2개의 클러스터</code></strong> 를 기반으로 멀티 클러스터 환경을 구성하는 예제를 제공한다.</p>
+<h4 id="csp-%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%ED%99%98%EA%B2%BD">CSP 쿠버네티스 클러스터 환경</h4>
+<table>
+<thead>
+<tr>
+<th>Kubernetes Service</th>
+<th>Version</th>
+<th>CNI</th>
+<th>Server Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ncloud Kubernetes Service (NKS)</td>
+<td>v1.28.10</td>
+<td>Cilium</td>
+<td>Ubuntu 22.04</td>
+</tr>
+<tr>
+<td>NHN kubernetes Service (NKS)</td>
+<td>v1.32.3</td>
+<td>Calico</td>
+<td>Ubuntu 22.04</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h2 id="span-id33-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%94%8C%EB%9E%AB%ED%8F%BC-%ED%8F%AC%ED%84%B8-%EB%B0%B0%ED%8F%AC-%EC%8B%9C-%EC%82%AC%EC%A0%84-%EC%84%A4%EC%A0%95"><span id='3'>3. 컨테이너 플랫폼 포털 배포 시 사전 설정</h2>
+<blockquote>
+<p>csp사 kubernetes service 생성 방법에 대한 내용은 생략한다.<br>
+해당 가이드를 통해 구성된 Istio 멀티 클러스터 환경에 컨테이너 플랫폼 포털을 배포할 경우 아래 사전 설정이 필요하다.</p>
+</blockquote>
+<h3 id="span-id3131-deployment-%ED%8C%8C%EC%9D%BC-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C"><span id='3.1'>3.1. Deployment 파일 다운로드</h3>
+<p>Istio 멀티 클러스터 구성을 위해 컨테이너 플랫폼 포털 Deployment 파일을 다운로드 받아 아래 경로로 위치시킨다.<br></p>
+<ul>
+<li>컨테이너 플랫폼 포털 Deployment 파일 다운로드 :
+<a href="https://nextcloud.k-paas.org/index.php/s/FQFddRC4wiq5cdj/download">cp-portal-deployment-v1.6.1.tar.gz</a></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Deployment 파일 다운로드 경로 생성</span>
+$ mkdir -p ~/workspace/container-platform
+$ <span class="hljs-built_in">cd</span> ~/workspace/container-platform
+
+<span class="hljs-comment"># Deployment 파일 다운로드 및 파일 경로 확인</span>
+$ wget --content-disposition https://nextcloud.k-paas.org/index.php/s/FQFddRC4wiq5cdj/download
+
+$ ls ~/workspace/container-platform
+  cp-portal-deployment-v1.6.1.tar.gz
+
+<span class="hljs-comment"># Deployment 파일 압축 해제</span>
+$ tar -xvf cp-portal-deployment-v1.6.1.tar.gz
+</div></code></pre>
+<h3 id="span-id3232-%EB%8F%84%EA%B5%AC-%EC%84%A4%EC%B9%98"><span id='3.2'>3.2. 도구 설치</h3>
+<blockquote>
+<p><a href="#2.1">[2.1. 설치 목록]</a> <br></p>
+</blockquote>
+<p>Istio 멀티 클러스터 구성을 위해 필요한 커맨드 라인 등 도구의 사전 설치가 필요하다. <br>
+<code>kubectl</code>의 경우 클러스터의 마이너(minor) 버전 차이 내에 있는 버전 사용이 필요하므로 클러스터 버전을 확인하여<br>
+변경이 필요한 경우 아래 파일을 수정한다.<br>
+또한 도구 설치는 <code>모든 클러스터</code>에서 사전에 진행한다.</p>
+<pre class="hljs"><code><div>$ <span class="hljs-built_in">cd</span> ~/workspace/container-platform/cp-portal-deployment/istio_mc
+$ vi istio-vars-mc.sh
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># 설치할 버전으로 변경 </span>
+<span class="hljs-comment"># command line tool</span>
+KUBECTL_VERSION=<span class="hljs-string">"1.30.3"</span>
+HELM_VERSION=<span class="hljs-string">"3.14.2"</span>
+STEP_VERSION=<span class="hljs-string">"0.24.4"</span>
+
+<span class="hljs-comment"># Istio</span>
+ISTIO_VERSION=<span class="hljs-string">"1.24.0"</span>
+...
+</div></code></pre>
+<p>도구 설치 스크립트를 실행한다.</p>
+<pre class="hljs"><code><div>$ <span class="hljs-built_in">cd</span> ~/workspace/container-platform/cp-portal-deployment/istio_mc
+$ chmod +x install_tools.sh
+$ ./install_tools.sh
+</div></code></pre>
+<br>
+<h3 id="span-id3333-storageclass-%EC%84%A4%EC%A0%95"><span id='3.3'>3.3. StorageClass 설정</h3>
+<p>각 클러스터에 <code>StorageClass</code>가 설정되어 있는지 확인한다.</p>
+<blockquote>
+<p>StorageClass를 제공하지 않는다면 별도 설치 필요<br>
+<a href="../nfs-server-install-guide.md">NFS Server 설치 가이드</a></p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-comment"># 클러스터 cluster1의 StorageClass 조회 (별도 설치)</span>
+$ kubectl get storageclass --context=<span class="hljs-variable">${CLUSTER1_CONFIG[CTX]}</span>
+NAME              PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+cp-storageclass   cp-nfs-provisioner   Delete          Immediate           <span class="hljs-literal">false</span>                  2m46s
+
+<span class="hljs-comment"># 클러스터 cluster2의 StorageClass 조회</span>
+$ kubectl get storageclass --context=<span class="hljs-variable">${CLUSTER2_CONFIG[CTX]}</span>
+NAME                          PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+nks-block-storage (default)   blk.csi.ncloud.com   Delete          WaitForFirstConsumer   <span class="hljs-literal">true</span>                   5h14m
+</div></code></pre>
+<br>
+<h3 id="span-id3434-metrics-server-%EC%84%A4%EC%B9%98"><span id='3.4'>3.4. Metrics Server 설치</h3>
+<p>컨테이너 플랫폼 관리 클러스터의 Metrics 정보 수집을 위해 Metrics Server 설치가 필요하다.</p>
+<blockquote>
+<p><a href="#metrics-server-%EC%84%A4%EC%B9%98">Metrics Server 설치</a></p>
+</blockquote>
+<br>
+<h3 id="span-id3535-cilium-cni-%EC%82%AC%EC%9A%A9-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EC%84%A4%EC%A0%95-%EB%B3%80%EA%B2%BD"><span id='3.5'>3.5. Cilium CNI 사용 클러스터 설정 변경</h3>
+<ul>
+<li>naver cloud<br></li>
+</ul>
+<p>CNI로 <code>Cilium</code>을 사용하는 클러스터에서 Istio 구성 시 아래 설정 변경이 필요하다.</p>
+<blockquote>
+<p><a href="https://docs.cilium.io/en/stable/network/servicemesh/istio">Cilium’s integration with Istio</a></p>
+</blockquote>
+<h4 id="cilium-configmap-%EC%88%98%EC%A0%95">Cilium Configmap 수정</h4>
+<pre class="hljs"><code><div>$ kubectl edit configmaps cilium-config -n kube-system
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># 추가</span>
+<span class="hljs-attr">bpf-lb-sock-hostns-only:</span> <span class="hljs-string">"true"</span>
+<span class="hljs-attr">cni-exclusive:</span> <span class="hljs-string">"false"</span>
+
+<span class="hljs-comment"># 수정</span>
+<span class="hljs-attr">enable-l7-proxy:</span> <span class="hljs-string">"false"</span> 
+</div></code></pre>
+<h4 id="cilium-daemonset-%EC%9E%AC%EC%8B%9C%EC%9E%91">Cilium DaemonSet 재시작</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># cilium daemonset 재시작</span>
+$ kubectl rollout restart daemonset cilium -n kube-system
+daemonset.apps/cilium restarted
+
+<span class="hljs-comment"># cilium pod 상태 'running' 조회</span>
+$ kubectl get pods -n kube-system -l k8s-app=cilium
+NAME           READY   STATUS    RESTARTS   AGE
+cilium-b4l8k   1/1     Running   0          4m32s
+cilium-sqps5   1/1     Running   0          4m32s
+</div></code></pre>
+<h2 id="span-id44-istio-%EB%A9%80%ED%8B%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%84%B1"><span id='4'>4. Istio 멀티 클러스터 구성</h2>
+<blockquote>
+<p>Istio를 활용하여 <strong><code>2개의 클러스터</code></strong> 를 기반으로 멀티 클러스터 환경을 구성하는 예제를 제공한다.</p>
+</blockquote>
+<br>
+<blockquote>
+<p>ncloud 확인 사항<br></p>
+</blockquote>
+<ul>
+<li>메인 계정으로 인스턴스 생성 시 root, 서브 계정으로 인스턴스 생성 시 ncloud 계정을 기본으로 사용한다.
+<ul>
+<li>멀티 구성의 경우 각 vm에 설치하는 과정에서 동일한 계정이 존재하지 않으면 정상적으로 설치가 진행되지 않는다.
+<ul>
+<li>vm에 미리 동일한 계정을 생성해준다.</li>
+<li>ex ) ubuntu -&gt; ubuntu / ncloud -&gt; ncloud</li>
+</ul>
+</li>
+<li>sudo 실행 권한 확인</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">#계정 생성</span>
+$ sudo useradd -m -s /bin/bash ubuntu
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"ubuntu ALL=(ALL) NOPASSWD: ALL"</span> | sudo tee -a /etc/sudoers
+
+$ sudo mkdir -p /home/ubuntu/.ssh
+$ sudo ssh-keygen -t rsa -m PEM -N <span class="hljs-string">''</span> -f /home/ubuntu/.ssh/id_rsa
+$ sudo cat /home/ubuntu/.ssh/id_rsa.pub | sudo tee -a /home/ubuntu/.ssh/authorized_keys
+$ sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+</div></code></pre>
+<h3 id="span-id4141-%EB%A9%80%ED%8B%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EC%A0%91%EA%B7%BC-%EA%B5%AC%EC%84%B1"><span id='4.1'>4.1. 멀티 클러스터 접근 구성</h3>
+<p>Istio 멀티 클러스터 구성은 <code>kubectl config get-contexts</code> 명령어로 출력된 컨텍스트 목록을 기반으로 진행된다.<br>
+따라서 각 클러스터에 접근할 수 있도록 컨텍스트를 미리 구성해야 한다.<br></p>
+<ul>
+<li>각 클러스터 kubeconfig 파일 내 cluster, context, user 명이 중복되지 않도록 한다.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># .kube 디렉터리 생성 및 이동</span>
+$ mkdir -p <span class="hljs-variable">${HOME}</span>/.kube
+$ <span class="hljs-built_in">cd</span> <span class="hljs-variable">${HOME}</span>/.kube
+
+<span class="hljs-comment"># 각 cluster kubeconfig 파일 위치</span>
+$ ls <span class="hljs-variable">${HOME}</span>/.kube
+cluster1-config  cluster2-config
+
+<span class="hljs-comment"># kubeconfig 파일 경로 설정</span>
+$ <span class="hljs-built_in">export</span> KUBECONFIG=<span class="hljs-string">"<span class="hljs-variable">${HOME}</span>/.kube/cluster1-config:<span class="hljs-variable">${HOME}</span>/.kube/cluster2-config"</span>
+</div></code></pre>
+<h5 id="name-cluster-authinfo-%EA%B0%92-%EC%B6%9C%EB%A0%A5-%EC%A0%95%EC%83%81-%ED%99%95%EC%9D%B8"><code>NAME</code>, <code>CLUSTER</code>, <code>AUTHINFO</code> 값 출력 정상 확인</h5>
+<pre class="hljs"><code><div>$ kubectl config get-contexts
+CURRENT   NAME     CLUSTER      AUTHINFO     NAMESPACE
+*         ncloud   ncloud-nks   ncloud-nks
+          nhn      nhn-nks      nhn-nks
+</div></code></pre>
+<h5 id="%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%A1%B0%ED%9A%8C-%EC%A0%95%EC%83%81-%ED%99%95%EC%9D%B8">클러스터 리소스 조회 정상 확인</h5>
+<pre class="hljs"><code><div><span class="hljs-comment"># cluster1 (ncloud) 노드 조회</span>
+$ kubectl get nodes --context=ncloud
+NAME                    STATUS   ROLES    AGE    VERSION
+ncloud-nks-w-2lmr       Ready    &lt;none&gt;   5d6h   v1.28.10
+ncloud-nks-w-2lms       Ready    &lt;none&gt;   5d6h   v1.28.10
+
+<span class="hljs-comment"># cluster2 (nhn) 노드 조회</span>
+$ kubectl get nodes --context=nhn
+NAME                                STATUS   ROLES    AGE    VERSION
+nhn-nks-default-worker-node-0       Ready    &lt;none&gt;   5d6h   v1.30.3
+nhn-nks-default-worker-node-1       Ready    &lt;none&gt;   5d6h   v1.30.3
+</div></code></pre>
+<br>
+<h3 id="span-id4242-istio-%EB%A9%80%ED%8B%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%84%B1-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%ED%96%89"><span id='4.2'>4.2. Istio 멀티 클러스터 구성 스크립트 실행</h3>
+<p>Istio 멀티 클러스터 구성을 위한 스크립트를 실행한다.</p>
+<pre class="hljs"><code><div>$ <span class="hljs-built_in">cd</span> ~/workspace/container-platform/cp-portal-deployment/istio_mc
+$ chmod +x deploy-istio-mc.sh
+$ ./deploy-istio-mc.sh
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># (예시) 다음은 클러스터 2개를 대상으로 실행한 Istio 설치 스크립트 로그이다.</span>
+[Generate Root CA]...
+Your certificate has been saved <span class="hljs-keyword">in</span> certs/root-cert.pem.
+Your private key has been saved <span class="hljs-keyword">in</span> certs/root-ca.key.
+[Install Istio <span class="hljs-keyword">in</span> cluster1]...
+Your certificate has been saved <span class="hljs-keyword">in</span> certs/kt-k2p/ca-cert.pem.
+Your private key has been saved <span class="hljs-keyword">in</span> certs/kt-k2p/ca-key.pem.
+namespace/istio-system created
+secret/cacerts created
+        |\
+        | \
+        |  \
+        |   \
+      /||    \
+     / ||     \
+    /  ||      \
+   /   ||       \
+  /    ||        \
+ /     ||         \
+/______||__________\
+____________________
+  \__       _____/
+     \_____/
+
+✔ Istio core installed ⛵️
+✔ Istiod installed 🧠
+✔ Installation complete
+        |\
+        | \
+        |  \
+        |   \
+      /||    \
+     / ||     \
+    /  ||      \
+   /   ||       \
+  /    ||        \
+ /     ||         \
+/______||__________\
+____________________
+  \__       _____/
+     \_____/
+
+✔ Ingress gateways installed 🛬
+✔ Installation complete
+gateway.networking.istio.io/cross-network-gateway created
+customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
+customresourcedefinition.apiextensions.k8s.io/gateways.gateway.networking.k8s.io created
+customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.io created
+customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
+[Install Istio <span class="hljs-keyword">in</span> cluster2]...
+Your certificate has been saved <span class="hljs-keyword">in</span> certs/ncloud-nks/ca-cert.pem.
+Your private key has been saved <span class="hljs-keyword">in</span> certs/ncloud-nks/ca-key.pem.
+namespace/istio-system created
+secret/cacerts created
+        |\
+        | \
+        |  \
+        |   \
+      /||    \
+     / ||     \
+    /  ||      \
+   /   ||       \
+  /    ||        \
+ /     ||         \
+/______||__________\
+____________________
+  \__       _____/
+     \_____/
+
+✔ Istio core installed ⛵️
+✔ Istiod installed 🧠
+✔ Installation complete
+        |\
+        | \
+        |  \
+        |   \
+      /||    \
+     / ||     \
+    /  ||      \
+   /   ||       \
+  /    ||        \
+ /     ||         \
+/______||__________\
+____________________
+  \__       _____/
+     \_____/
+
+✔ Ingress gateways installed 🛬
+✔ Installation complete
+gateway.networking.istio.io/cross-network-gateway created
+customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
+customresourcedefinition.apiextensions.k8s.io/gateways.gateway.networking.k8s.io created
+customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.io created
+customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
+
+secret/istio-remote-secret-kt-k2p created
+secret/istio-remote-secret-kt-k2p created
+secret/istio-remote-secret-ncloud-nks created
+secret/istio-remote-secret-ncloud-nks created
+secret/istio-remote-secret-nhn-nks created
+secret/istio-remote-secret-nhn-nks created
+--------------------------------------------------------------
+[cluster1 (ncloud)] $ istioctl remote-clusters
+--------------------------------------------------------------
+NAME           SECRET                                       STATUS     ISTIOD
+ncloud-nks                                                  synced     istiod-5c6c96f9c4-xg66w
+kt-k2p         istio-system/istio-remote-secret-kt-k2p      synced     istiod-5c6c96f9c4-xg66w
+nhn-nks        istio-system/istio-remote-secret-nhn-nks     synced     istiod-5c6c96f9c4-xg66w
+
+--------------------------------------------------------------
+[cluster2 (nhn)] $ istioctl remote-clusters
+--------------------------------------------------------------
+NAME           SECRET                                          STATUS     ISTIOD
+nhn-nks                                                        synced     istiod-5bdd85f847-swxk4
+kt-k2p         istio-system/istio-remote-secret-kt-k2p         synced     istiod-5bdd85f847-swxk4
+ncloud-nks     istio-system/istio-remote-secret-ncloud-nks     synced     istiod-5bdd85f847-swxk4
+</div></code></pre>
+<br>
+<h4 id="istio-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EB%B0%B0%ED%8F%AC-%ED%98%84%ED%99%A9">Istio 리소스 배포 현황</h4>
+<blockquote>
+<p>클러스터 컨텍스트 명 환경변수 설정</p>
+</blockquote>
+<pre class="hljs"><code><div>$ <span class="hljs-built_in">source</span> ~/workspace/container-platform/cp-portal-deployment/istio_mc/istio-vars-mc.sh
+</div></code></pre>
+<h4 id="cluster1-ncloud-nks-istio-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EB%B0%B0%ED%8F%AC-%ED%98%84%ED%99%A9-%ED%99%95%EC%9D%B8">cluster1 (Ncloud NKS) Istio 리소스 배포 현황 확인</h4>
+<p><strong>Ncloud Kubernetes Service</strong>는 기본 CNI로 <code>Cilium</code>을 제공한다. <br>
+Cilium을 사용하는 Kubernetes 클러스터에서 Istio 사용과 관련된 내용을 참고한다.</p>
+<blockquote>
+<p><a href="https://docs.cilium.io/en/stable/network/servicemesh/istio">[Cilium’s integration with Istio]</a> <br>
+<a href="#6.3">(참고) [6.3.Cilium CNI 사용 클러스터 설정 변경]</a></p>
+</blockquote>
+<pre class="hljs"><code><div>$ kubectl get all -n <span class="hljs-variable">${ISTIO_NAMESPACE}</span> --context=<span class="hljs-variable">${CLUSTER2_CONFIG[CTX]}</span>
+NAME                                        READY   STATUS    RESTARTS   AGE
+pod/istio-ingressgateway-7596586df5-77kwt   1/1     Running   0          9m14s
+pod/istiod-5c6c96f9c4-xg66w                 1/1     Running   0          9m22s
+
+NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP                         PORT(S)                                                                                                      AGE
+service/istio-ingressgateway   LoadBalancer   198.19.236.169   istio-syste-istio-ingres-xxx.com    15021:30852/TCP,80:30966/TCP,443:30811/TCP,31400:30812/TCP,15443:31121/TCP,15012:31116/TCP,15017:30571/TCP   9m14s
+service/istiod                 ClusterIP      198.19.150.8     &lt;none&gt;                              15010/TCP,15012/TCP,443/TCP,15014/TCP                                                                        9m22s
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/istio-ingressgateway   1/1     1            1           9m15s
+deployment.apps/istiod                 1/1     1            1           9m23s
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/istio-ingressgateway-7596586df5   1         1         1       9m16s
+replicaset.apps/istiod-5c6c96f9c4                 1         1         1       9m24s
+
+NAME                                                       REFERENCE                         TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/istio-ingressgateway   Deployment/istio-ingressgateway   3%/80%    1         5         1          9m16s
+</div></code></pre>
+<h4 id="cluster2-nhn-nks-istio-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EB%B0%B0%ED%8F%AC-%ED%98%84%ED%99%A9-%ED%99%95%EC%9D%B8">cluster2 (NHN NKS) Istio 리소스 배포 현황 확인</h4>
+<pre class="hljs"><code><div>$ kubectl get all -n <span class="hljs-variable">${ISTIO_NAMESPACE}</span> --context=<span class="hljs-variable">${CLUSTER3_CONFIG[CTX]}</span>
+NAME                                        READY   STATUS    RESTARTS   AGE
+pod/istio-ingressgateway-5df95c4895-kcrrv   1/1     Running   0          10m
+pod/istiod-5bdd85f847-swxk4                 1/1     Running   0          10m
+
+NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                                                                                                      AGE
+service/istio-ingressgateway   LoadBalancer   10.254.216.17   133.xxx.xxx.xxx   15021:32380/TCP,80:32215/TCP,443:31685/TCP,31400:31715/TCP,15443:31549/TCP,15012:32498/TCP,15017:31299/TCP   10m
+service/istiod                 ClusterIP      10.254.166.12   &lt;none&gt;            15010/TCP,15012/TCP,443/TCP,15014/TCP                                                                        10m
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/istio-ingressgateway   1/1     1            1           10m
+deployment.apps/istiod                 1/1     1            1           10m
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/istio-ingressgateway-5df95c4895   1         1         1       10m
+replicaset.apps/istiod-5bdd85f847                 1         1         1       10m
+
+NAME                                                       REFERENCE                         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/istio-ingressgateway   Deployment/istio-ingressgateway   cpu: 2%/80%   1         5         1          10m
+</div></code></pre>
+<br> 
+<h2 id="span-id55-%EC%83%98%ED%94%8C-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B0%B0%ED%8F%AC"><span id='5'>5. 샘플 애플리케이션 배포</h2>
+<p>멀티 클러스터 통신 테스트를 위해 클러스터 cluster1, cluster2에 샘플 애플리케이션을 배포한다.</p>
+<blockquote>
+<p><a href="https://istio.io/latest/docs/examples/bookinfo/">Istio Bookinfo Application</a>의 일부 애플리케이션 배포</p>
+</blockquote>
+<h4 id="%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B0%B0%ED%8F%AC-%EC%9C%84%EC%B9%98">애플리케이션 배포 위치</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># 클러스터 컨텍스트 명 환경변수 설정</span>
+$ <span class="hljs-built_in">source</span> ~/workspace/container-platform/cp-portal-deployment/istio_mc/istio-vars-mc.sh
+
+<span class="hljs-comment"># sample 디렉토리 생성 </span>
+$ mkdir -p ~/workspace/container-platform/cp-portal-deployment/istio_mc/sample
+$ <span class="hljs-built_in">cd</span> ~/workspace/container-platform/cp-portal-deployment/istio_mc/sample
+
+<span class="hljs-comment"># bookinfo 서비스 배포 yaml 다운로드</span>
+$ wget https://raw.githubusercontent.com/istio/istio/release-1.24/samples/bookinfo/platform/kube/bookinfo.yaml
+<span class="hljs-comment"># sleep 서비스 배포 yaml 다운로드</span>
+$ wget https://raw.githubusercontent.com/istio/istio/master/samples/sleep/sleep.yaml
+</div></code></pre>
+<br>
+<h3 id="span-id5151-%EB%A9%80%ED%8B%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EC%83%98%ED%94%8C-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B0%B0%ED%8F%AC"><span id='5.1'>5.1. 멀티 클러스터 샘플 애플리케이션 배포</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># 각 클러스터에 sample 네임스페이스 생성 및 Istio 사이드카 프록시 자동 주입 활성화</span>
+<span class="hljs-comment"># clusterN에 reviews-N 애플리케이션 배포</span>
+<span class="hljs-keyword">for</span> IDX <span class="hljs-keyword">in</span> $(seq 1 <span class="hljs-string">"<span class="hljs-variable">$CLUSTER_CNT</span>"</span>); <span class="hljs-keyword">do</span> CTX=<span class="hljs-string">"CLUSTER<span class="hljs-variable">${IDX}</span>_CONFIG[CTX]"</span>; \
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"context: <span class="hljs-variable">${!CTX}</span>"</span>
+  kubectl --context=<span class="hljs-variable">${!CTX}</span> create ns sample; \
+  kubectl --context=<span class="hljs-variable">${!CTX}</span> label namespace sample istio-injection=enabled; \
+  kubectl --context=<span class="hljs-variable">${!CTX}</span> -n sample apply -f bookinfo.yaml -l service=reviews; \
+  kubectl --context=<span class="hljs-variable">${!CTX}</span> -n sample apply -f bookinfo.yaml -l account=reviews; \
+  kubectl --context=<span class="hljs-variable">${!CTX}</span> -n sample apply -f bookinfo.yaml -l app=reviews,version=v<span class="hljs-variable">${IDX}</span>; \
+<span class="hljs-keyword">done</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># cluster3에 sleep 애플리케이션 배포</span>
+$ kubectl --context=<span class="hljs-string">"<span class="hljs-variable">${CLUSTER3_CONFIG[CTX]}</span>"</span> -n sample apply -f sleep.yaml
+</div></code></pre>
+<br>
+<h3 id="span-id5252-%EB%A9%80%ED%8B%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%ED%86%B5%EC%8B%A0-%ED%85%8C%EC%8A%A4%ED%8A%B8"><span id='5.2'>5.2. 멀티 클러스터 통신 테스트</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># cluster1의 reviews-v1 pod 조회</span>
+$ kubectl get pods -l app=reviews --context=<span class="hljs-string">"<span class="hljs-variable">${CLUSTER1_CONFIG[CTX]}</span>"</span> -n sample
+NAME                          READY   STATUS    RESTARTS   AGE
+reviews-v2-65c9797659-zp6mf   2/2     Running   0          2m42s
+
+<span class="hljs-comment"># cluster2의 reviews-v2, sleep pod 조회</span>
+$ kubectl get pods -l app=reviews --context=<span class="hljs-string">"<span class="hljs-variable">${CLUSTER2_CONFIG[CTX]}</span>"</span> -n sample
+NAME                          READY   STATUS    RESTARTS   AGE
+reviews-v3-77947c4c78-7vvkf   2/2     Running   0          3m9s
+
+$ kubectl get pods -l app=sleep --context=<span class="hljs-string">"<span class="hljs-variable">${CLUSTER2_CONFIG[CTX]}</span>"</span> -n sample
+NAME                     READY   STATUS    RESTARTS   AGE
+sleep-5577c64d7c-9zg7w   2/2     Running   0          74s
+</div></code></pre>
+<h2 id="span-id66-istio-%EB%A9%80%ED%8B%B0-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%84%B1-%EC%82%AD%EC%A0%9C"><span id='6'>6. Istio 멀티 클러스터 구성 삭제</h2>
+<p>Istio 멀티 클러스터 구성의 삭제를 원하는 경우 아래 스크립트를 실행한다.<br>
+<img class="emoji" alt="loudspeaker" src="data:image/png;base64,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" /> (주의) 해당 스크립트 실행 시, <strong>Istio 멀티클러스터 구성이 모두 제거</strong>되므로 주의가 필요하다.<br></p>
+<pre class="hljs"><code><div>$ <span class="hljs-built_in">cd</span> ~/workspace/container-platform/cp-portal-deployment/istio_mc
+$ chmod +x uninstall-istio-mc.sh
+$ ./uninstall-istio-mc.sh
+Are you sure you want to uninstall istio <span class="hljs-keyword">in</span> all clusters? &lt;y/n&gt; y <span class="hljs-comment"># y 입력</span>
+</div></code></pre>
+
+</body>
+</html>
