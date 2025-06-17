@@ -16,12 +16,12 @@
 3. [컨테이너 플랫폼 포털 배포 시 사전 설정](#3)    
    3.1. [Deployment 파일 다운로드](#3.1)   
    3.2. [도구 설치](#3.2)  
-   3.3. [StorageClass 설정](#3.3)  
-   3.4. [Metrics Server 설치](#3.4)  
-   3.5. [Cilium CNI 사용 클러스터 설정 변경](#3.5)    
 4. [Istio 멀티 클러스터 구성](#4)  
-   4.1. [멀티 클러스터 접근 구성](#4.1)       
-   4.2. [Istio 멀티 클러스터 구성 스크립트 실행](#4.2)   
+   4.1. [멀티 클러스터 접근 구성](#4.1)   
+   4.2. [StorageClass 설정(참고)](#4.2)  
+   4.3. [Metrics Server 설치(참고)](#4.3)  
+   4.4. [Cilium CNI 사용 클러스터 설정 변경(참고)](#4.4)    
+   4.5. [Istio 멀티 클러스터 구성 스크립트 실행](#4.5)   
 5. [샘플 애플리케이션 배포](#5)  
    5.1. [멀티 클러스터 샘플 애플리케이션 배포](#5.1)     
    5.2. [멀티 클러스터 통신 테스트](#5.2)    
@@ -59,7 +59,6 @@
 <br>
 
 ## <span id='2'> 2. 정보
-
 ### <span id='2.1'>2.1. Prerequisite
 - 작업 인스턴스는 **Ubuntu 22.04** 환경에서 진행하는 것을 기준으로 한다.
 - 각 클러스터는 **로드 밸런서(LoadBalancer)** 유형의 서비스 지원이 필요하다.
@@ -111,8 +110,34 @@ Istio를 활용하여 **`2개의 클러스터`** 를 기반으로 멀티 클러�
 <br>
 
 ## <span id='3'>3. 컨테이너 플랫폼 포털 배포 시 사전 설정
->csp사 kubernetes service 생성 방법에 대한 내용은 생략한다.<br>
+>csp에 따른 kubernetes service 생성 방법은 생략한다.(`csp에 따른 가이드 참고`) 
+
 해당 가이드를 통해 구성된 Istio 멀티 클러스터 환경에 컨테이너 플랫폼 포털을 배포할 경우 아래 사전 설정이 필요하다.
+<br>
+>ncloud 확인 사항<br>
+ - 메인 계정으로 인스턴스 생성 시 root, 서브 계정으로 인스턴스 생성 시 ncloud 계정을 기본으로 사용한다. 
+    - 멀티 구성의 경우 각 vm에 설치하는 과정에서 동일한 계정이 존재하지 않으면 정상적으로 설치가 진행되지 않는다.
+      - vm에 미리 동일한 계정을 생성해준다.
+      - ex ) ubuntu -> ubuntu / ncloud -> ncloud
+    -  sudo 실행 권한 확인
+  
+```bash
+#계정 생성
+$ sudo useradd -m -s /bin/bash ubuntu
+$ echo "ubuntu ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+
+$ sudo mkdir -p /home/ubuntu/.ssh
+$ sudo ssh-keygen -t rsa -m PEM -N '' -f /home/ubuntu/.ssh/id_rsa
+$ sudo cat /home/ubuntu/.ssh/id_rsa.pub | sudo tee -a /home/ubuntu/.ssh/authorized_keys
+$ sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+
+#비밀번호 변경
+$ sudo passwd ubuntu
+New password: 
+Retype new password: 
+passwd: password updated successfully
+```
+ubuntu로 계정 생성을 완료한 다음 ubuntu계정으로 다시 접근을 하여 다음 작업들을 진행한다.
 
 ### <span id='3.1'>3.1. Deployment 파일 다운로드
 Istio 멀티 클러스터 구성을 위해 컨테이너 플랫폼 포털 Deployment 파일을 다운로드 받아 아래 경로로 위치시킨다.<br>
@@ -158,7 +183,6 @@ STEP_VERSION="0.24.4"
 ISTIO_VERSION="1.24.0"
 ...
 ```
-
 도구 설치 스크립트를 실행한다.
 ```bash
 $ cd ~/workspace/container-platform/cp-portal-deployment/istio_mc
@@ -168,31 +192,107 @@ $ ./install_tools.sh
 
 <br>
 
-### <span id='3.3'>3.3. StorageClass 설정
+
+
+
+## <span id='4'>4. Istio 멀티 클러스터 구성
+Istio를 활용하여 **`2개의 클러스터`** 를 기반으로 멀티 클러스터 환경을 구성하는 예제를 제공한다.
+
+### <span id='4.1'>4.1. 멀티 클러스터 접근 구성
+Istio 멀티 클러스터 구성은 `kubectl config get-contexts` 명령어로 출력된 컨텍스트 목록을 기반으로 진행된다.<br>
+따라서 각 클러스터에 접근할 수 있도록 컨텍스트를 미리 구성해야 한다.<br>
+- 각 클러스터 kubeconfig 파일 내 cluster, context, user 명이 중복되지 않도록 한다.
+
+```bash
+# .kube 디렉터리 생성 및 이동
+$ mkdir -p ${HOME}/.kube
+$ cd ${HOME}/.kube
+
+# 각 cluster kubeconfig 파일 위치
+$ ls ${HOME}/.kube
+cluster1-config  cluster2-config
+
+# kubeconfig 파일 경로 설정
+$ export KUBECONFIG="${HOME}/.kube/cluster1-config:${HOME}/.kube/cluster2-config"
+
+# context 이름 변경
+$ kubectl config rename-context nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4 ncloud
+Context "nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4" renamed to "ncloud".
+$ kubectl config rename-context nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160 nhn
+Context "nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160" renamed to "nhn".
+```
+##### `NAME`, `CLUSTER`, `AUTHINFO` 값 출력 정상 확인
+
+```bash
+$ kubectl config get-contexts
+CURRENT   NAME     CLUSTER                                                           AUTHINFO                                                          NAMESPACE
+*         ncloud   nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4   nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4   
+          nhn      nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160      nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160 
+```
+##### 클러스터 리소스 조회 정상 확인
+```bash
+# cluster1 (ncloud) 노드 조회
+$ kubectl get nodes --context=ncloud
+NAME                      STATUS   ROLES    AGE    VERSION
+portal-test-node-w-3f6k   Ready    <none>   3h9m   v1.32.3
+portal-test-node-w-3f6l   Ready    <none>   3h9m   v1.32.3
+# cluster2 (nhn) 노드 조회
+$ kubectl get nodes --context=nhn
+NAME                                        STATUS   ROLES    AGE   VERSION
+portal-test-cluster-default-worker-node-0   Ready    <none>   38m   v1.32.3
+
+```
+<br>
+
+### <span id='4.2'>4.2. StorageClass 설정(참고)
 각 클러스터에 `StorageClass`가 설정되어 있는지 확인한다.
 > StorageClass를 제공하지 않는다면 별도 설치 필요<br>
 > [NFS Server 설치 가이드](../nfs-server-install-guide.md)
 ```bash
-# 클러스터 cluster1의 StorageClass 조회 (별도 설치)
-$ kubectl get storageclass --context=${CLUSTER1_CONFIG[CTX]}
-NAME              PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-cp-storageclass   cp-nfs-provisioner   Delete          Immediate           false                  2m46s
-
-# 클러스터 cluster2의 StorageClass 조회
-$ kubectl get storageclass --context=${CLUSTER2_CONFIG[CTX]}
+# 클러스터 cluster1의 StorageClass 조회
+$ kubectl get storageclass --context=ncloud
 NAME                          PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
-nks-block-storage (default)   blk.csi.ncloud.com   Delete          WaitForFirstConsumer   true                   5h14m
+nks-block-storage (default)   blk.csi.ncloud.com   Delete          WaitForFirstConsumer   true                   3h32m
+nks-nas-csi                   nas.csi.ncloud.com   Delete          WaitForFirstConsumer   true                   3h32m
+
+#nhn의 경우 storageclass를 제공하지만 자동으로 생성해주지는 않는다.
+$ kubectl get storageclass --context=nhn
+No resources found
+```
+nhn storageClass는 별도로 배포해준다.
+```yaml
+$ vi storageclass.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: csi-storageclassi
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: cinder.csi.openstack.org
+volumeBindingMode: WaitForFirstConsumer
 ```
 
 <br>
 
-### <span id='3.4'>3.4. Metrics Server 설치
+### <span id='4.3'>4.3. Metrics Server 설치(참고)
 컨테이너 플랫폼 관리 클러스터의 Metrics 정보 수집을 위해 Metrics Server 설치가 필요하다.
-> [Metrics Server 설치](#metrics-server-설치) 
+> [Metrics Server 설치](#metrics-server-설치)
+
+```bash
+#설치 확인
+$ kubectl get pod -A --context=ncloud
+NAMESPACE     NAME                                             READY   STATUS    RESTARTS        AGE
+kube-system   metrics-server-55b68d74c4-vpn7b                  1/1     Running   0               3h38m
+
+$ kubectl get pod -A --context=nhn
+NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
+kube-system   metrics-server-75bc4d796b-qjmn8           1/1     Running   0          61m
+
+```
 
 <br>
 
-### <span id='3.5'>3.5. Cilium CNI 사용 클러스터 설정 변경 
+### <span id='4.4'>4.4. Cilium CNI 사용 클러스터 설정 변경(참고)
 - naver cloud<br>
 
 CNI로 `Cilium`을 사용하는 클러스터에서 Istio 구성 시 아래 설정 변경이 필요하다.  
@@ -215,80 +315,44 @@ enable-l7-proxy: "false"
 ```bash
 # cilium daemonset 재시작
 $ kubectl rollout restart daemonset cilium -n kube-system
+Warning: spec.template.metadata.annotations[container.apparmor.security.beta.kubernetes.io/mount-cgroup]: deprecated since v1.30; use the "appArmorProfile" field instead
+Warning: spec.template.metadata.annotations[container.apparmor.security.beta.kubernetes.io/apply-sysctl-overwrites]: deprecated since v1.30; use the "appArmorProfile" field instead
+Warning: spec.template.metadata.annotations[container.apparmor.security.beta.kubernetes.io/clean-cilium-state]: deprecated since v1.30; use the "appArmorProfile" field instead
+Warning: spec.template.metadata.annotations[container.apparmor.security.beta.kubernetes.io/cilium-agent]: deprecated since v1.30; use the "appArmorProfile" field instead
 daemonset.apps/cilium restarted
+
 
 # cilium pod 상태 'running' 조회
 $ kubectl get pods -n kube-system -l k8s-app=cilium
 NAME           READY   STATUS    RESTARTS   AGE
-cilium-b4l8k   1/1     Running   0          4m32s
-cilium-sqps5   1/1     Running   0          4m32s
+cilium-8sqdf   1/1     Running   0          22s
+cilium-pzrb4   1/1     Running   0          22s
 ```
 
+### <span id='4.5'>4.5. Istio 멀티 클러스터 구성 스크립트 실행
 
-
-## <span id='4'>4. Istio 멀티 클러스터 구성
->  Istio를 활용하여 **`2개의 클러스터`** 를 기반으로 멀티 클러스터 환경을 구성하는 예제를 제공한다.
-
-<br>
-
->ncloud 확인 사항<br>
- - 메인 계정으로 인스턴스 생성 시 root, 서브 계정으로 인스턴스 생성 시 ncloud 계정을 기본으로 사용한다. 
-    - 멀티 구성의 경우 각 vm에 설치하는 과정에서 동일한 계정이 존재하지 않으면 정상적으로 설치가 진행되지 않는다.
-      - vm에 미리 동일한 계정을 생성해준다.
-      - ex ) ubuntu -> ubuntu / ncloud -> ncloud
-    -  sudo 실행 권한 확인
-  
+스크립트를 실행하기전에 멀티 클러스터 설정을 위한 변수를 설정해준다.
 ```bash
-#계정 생성
-$ sudo useradd -m -s /bin/bash ubuntu
-$ echo "ubuntu ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+$ cd ~/workspace/container-platform/cp-portal-deployment/istio_mc
+$ vi istio-vars-mc.sh 
 
-$ sudo mkdir -p /home/ubuntu/.ssh
-$ sudo ssh-keygen -t rsa -m PEM -N '' -f /home/ubuntu/.ssh/id_rsa
-$ sudo cat /home/ubuntu/.ssh/id_rsa.pub | sudo tee -a /home/ubuntu/.ssh/authorized_keys
-$ sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+#이부분 추가
+declare -A CLUSTER1_CONFIG
+declare -A CLUSTER2_CONFIG
+# COMMON VARIABLE (Please change the value of the variables below.)
+CLUSTER1_CONFIG[CTX]="ncloud"    # Cluster1 Context Name
+CLUSTER2_CONFIG[CTX]="nhn"    # Cluster2 Context Name
+
+# The belows are the default values.
+# If you change the values below, there will be a problem with the deploy. Please keep the values.
+# TOOL
+KUBECTL_VERSION="1.30.3"
+HELM_VERSION="3.14.2"
+STEP_VERSION="0.24.4"
+...
+
 ```
-### <span id='4.1'>4.1. 멀티 클러스터 접근 구성
-Istio 멀티 클러스터 구성은 `kubectl config get-contexts` 명령어로 출력된 컨텍스트 목록을 기반으로 진행된다.<br>
-따라서 각 클러스터에 접근할 수 있도록 컨텍스트를 미리 구성해야 한다.<br>
-- 각 클러스터 kubeconfig 파일 내 cluster, context, user 명이 중복되지 않도록 한다.
 
-```bash
-# .kube 디렉터리 생성 및 이동
-$ mkdir -p ${HOME}/.kube
-$ cd ${HOME}/.kube
-
-# 각 cluster kubeconfig 파일 위치
-$ ls ${HOME}/.kube
-cluster1-config  cluster2-config
-
-# kubeconfig 파일 경로 설정
-$ export KUBECONFIG="${HOME}/.kube/cluster1-config:${HOME}/.kube/cluster2-config"
-```
-##### `NAME`, `CLUSTER`, `AUTHINFO` 값 출력 정상 확인
-```bash
-$ kubectl config get-contexts
-CURRENT   NAME     CLUSTER      AUTHINFO     NAMESPACE
-*         ncloud   ncloud-nks   ncloud-nks
-          nhn      nhn-nks      nhn-nks
-```
-##### 클러스터 리소스 조회 정상 확인
-```bash
-# cluster1 (ncloud) 노드 조회
-$ kubectl get nodes --context=ncloud
-NAME                    STATUS   ROLES    AGE    VERSION
-ncloud-nks-w-2lmr       Ready    <none>   5d6h   v1.28.10
-ncloud-nks-w-2lms       Ready    <none>   5d6h   v1.28.10
-
-# cluster2 (nhn) 노드 조회
-$ kubectl get nodes --context=nhn
-NAME                                STATUS   ROLES    AGE    VERSION
-nhn-nks-default-worker-node-0       Ready    <none>   5d6h   v1.30.3
-nhn-nks-default-worker-node-1       Ready    <none>   5d6h   v1.30.3
-```
-<br>
-
-### <span id='4.2'>4.2. Istio 멀티 클러스터 구성 스크립트 실행
 Istio 멀티 클러스터 구성을 위한 스크립트를 실행한다.
 ```bash
 $ cd ~/workspace/container-platform/cp-portal-deployment/istio_mc
@@ -296,130 +360,118 @@ $ chmod +x deploy-istio-mc.sh
 $ ./deploy-istio-mc.sh
 ```
 ```bash
-# (예시) 다음은 클러스터 2개를 대상으로 실행한 Istio 설치 스크립트 로그이다.
+# $ ./deploy-istio-mc.sh 
 [Generate Root CA]...
 Your certificate has been saved in certs/root-cert.pem.
 Your private key has been saved in certs/root-ca.key.
 [Install Istio in cluster1]...
-Your certificate has been saved in certs/kt-k2p/ca-cert.pem.
-Your private key has been saved in certs/kt-k2p/ca-key.pem.
+Your certificate has been saved in certs/nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4/ca-cert.pem.
+Your private key has been saved in certs/nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4/ca-key.pem.
 namespace/istio-system created
 secret/cacerts created
-        |\
-        | \
-        |  \
-        |   \
-      /||    \
-     / ||     \
-    /  ||      \
-   /   ||       \
-  /    ||        \
- /     ||         \
+        |\          
+        | \         
+        |  \        
+        |   \       
+      /||    \      
+     / ||     \     
+    /  ||      \    
+   /   ||       \   
+  /    ||        \  
+ /     ||         \ 
 /______||__________\
 ____________________
-  \__       _____/
-     \_____/
+  \__       _____/  
+     \_____/        
 
-✔ Istio core installed ⛵️
-✔ Istiod installed 🧠
-✔ Installation complete
-        |\
-        | \
-        |  \
-        |   \
-      /||    \
-     / ||     \
-    /  ||      \
-   /   ||       \
-  /    ||        \
- /     ||         \
+✔ Istio core installed ⛵️                                                                                       
+✔ Istiod installed 🧠                                                                                          
+✔ Installation complete                                                                                        
+        |\          
+        | \         
+        |  \        
+        |   \       
+      /||    \      
+     / ||     \     
+    /  ||      \    
+   /   ||       \   
+  /    ||        \  
+ /     ||         \ 
 /______||__________\
 ____________________
-  \__       _____/
-     \_____/
+  \__       _____/  
+     \_____/        
 
-✔ Ingress gateways installed 🛬
-✔ Installation complete
+✔ Ingress gateways installed 🛬                                                                                
+✔ Installation complete                                                                                        
 gateway.networking.istio.io/cross-network-gateway created
 customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/gateways.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
 [Install Istio in cluster2]...
-Your certificate has been saved in certs/ncloud-nks/ca-cert.pem.
-Your private key has been saved in certs/ncloud-nks/ca-key.pem.
+Your certificate has been saved in certs/nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160/ca-cert.pem.
+Your private key has been saved in certs/nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160/ca-key.pem.
 namespace/istio-system created
 secret/cacerts created
-        |\
-        | \
-        |  \
-        |   \
-      /||    \
-     / ||     \
-    /  ||      \
-   /   ||       \
-  /    ||        \
- /     ||         \
+        |\          
+        | \         
+        |  \        
+        |   \       
+      /||    \      
+     / ||     \     
+    /  ||      \    
+   /   ||       \   
+  /    ||        \  
+ /     ||         \ 
 /______||__________\
 ____________________
-  \__       _____/
-     \_____/
+  \__       _____/  
+     \_____/        
 
-✔ Istio core installed ⛵️
-✔ Istiod installed 🧠
-✔ Installation complete
-        |\
-        | \
-        |  \
-        |   \
-      /||    \
-     / ||     \
-    /  ||      \
-   /   ||       \
-  /    ||        \
- /     ||         \
+✔ Istio core installed ⛵️                                                                                       
+✔ Istiod installed 🧠                                                                                          
+✔ Installation complete                                                                                        
+        |\          
+        | \         
+        |  \        
+        |   \       
+      /||    \      
+     / ||     \     
+    /  ||      \    
+   /   ||       \   
+  /    ||        \  
+ /     ||         \ 
 /______||__________\
 ____________________
-  \__       _____/
-     \_____/
+  \__       _____/  
+     \_____/        
 
-✔ Ingress gateways installed 🛬
-✔ Installation complete
+✔ Ingress gateways installed 🛬                                                                                
+✔ Installation complete                                                                                        
 gateway.networking.istio.io/cross-network-gateway created
 customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/gateways.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
+Error: nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4 is not a valid DNS 1123 label
+error: no objects passed to apply
+Error: nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160 is not a valid DNS 1123 label
+error: no objects passed to apply
 
-secret/istio-remote-secret-kt-k2p created
-secret/istio-remote-secret-kt-k2p created
-secret/istio-remote-secret-ncloud-nks created
-secret/istio-remote-secret-ncloud-nks created
-secret/istio-remote-secret-nhn-nks created
-secret/istio-remote-secret-nhn-nks created
 --------------------------------------------------------------
 [cluster1 (ncloud)] $ istioctl remote-clusters
 --------------------------------------------------------------
-NAME           SECRET                                       STATUS     ISTIOD
-ncloud-nks                                                  synced     istiod-5c6c96f9c4-xg66w
-kt-k2p         istio-system/istio-remote-secret-kt-k2p      synced     istiod-5c6c96f9c4-xg66w
-nhn-nks        istio-system/istio-remote-secret-nhn-nks     synced     istiod-5c6c96f9c4-xg66w
+NAME                                                                SECRET     STATUS     ISTIOD
+nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4                synced     istiod-6d44db4bdc-hlqjs
 
 --------------------------------------------------------------
 [cluster2 (nhn)] $ istioctl remote-clusters
 --------------------------------------------------------------
-NAME           SECRET                                          STATUS     ISTIOD
-nhn-nks                                                        synced     istiod-5bdd85f847-swxk4
-kt-k2p         istio-system/istio-remote-secret-kt-k2p         synced     istiod-5bdd85f847-swxk4
-ncloud-nks     istio-system/istio-remote-secret-ncloud-nks     synced     istiod-5bdd85f847-swxk4
+NAME                                                             SECRET     STATUS     ISTIOD
+nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160                synced     istiod-87d94786d-8xrq8
 ```
 <br>
-
-#### Istio 리소스 배포 현황
-> 클러스터 컨텍스트 명 환경변수 설정
-```bash
-$ source ~/workspace/container-platform/cp-portal-deployment/istio_mc/istio-vars-mc.sh
-```
 
 #### cluster1 (Ncloud NKS) Istio 리소스 배포 현황 확인
 **Ncloud Kubernetes Service**는 기본 CNI로 `Cilium`을 제공한다. <br>
@@ -429,51 +481,51 @@ Cilium을 사용하는 Kubernetes 클러스터에서 Istio 사용과 관련된 �
 
 
 ```bash
-$ kubectl get all -n ${ISTIO_NAMESPACE} --context=${CLUSTER2_CONFIG[CTX]}
+$ kubectl get all -n ${ISTIO_NAMESPACE} --context=${CLUSTER1_CONFIG[CTX]}
 NAME                                        READY   STATUS    RESTARTS   AGE
-pod/istio-ingressgateway-7596586df5-77kwt   1/1     Running   0          9m14s
-pod/istiod-5c6c96f9c4-xg66w                 1/1     Running   0          9m22s
+pod/istio-ingressgateway-64cffcd5f9-hphqq   1/1     Running   0          2m45s
+pod/istiod-6d44db4bdc-hlqjs                 1/1     Running   0          2m53s
 
-NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP                         PORT(S)                                                                                                      AGE
-service/istio-ingressgateway   LoadBalancer   198.19.236.169   istio-syste-istio-ingres-xxx.com    15021:30852/TCP,80:30966/TCP,443:30811/TCP,31400:30812/TCP,15443:31121/TCP,15012:31116/TCP,15017:30571/TCP   9m14s
-service/istiod                 ClusterIP      198.19.150.8     <none>                              15010/TCP,15012/TCP,443/TCP,15014/TCP                                                                        9m22s
+NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP                                                                    PORT(S)                                                                                                      AGE
+service/istio-ingressgateway   LoadBalancer   198.19.235.12   istio-syste-istio-ingres-1e9c3-101789248-f924e3285ceb.kr-gov.lb.naverncp.com   15021:31404/TCP,80:31016/TCP,443:31598/TCP,31400:32270/TCP,15443:31181/TCP,15012:31187/TCP,15017:30692/TCP   2m45s
+service/istiod                 ClusterIP      198.19.245.3    <none>                                                                         15010/TCP,15012/TCP,443/TCP,15014/TCP                                                                        2m54s
 
 NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/istio-ingressgateway   1/1     1            1           9m15s
-deployment.apps/istiod                 1/1     1            1           9m23s
+deployment.apps/istio-ingressgateway   1/1     1            1           2m46s
+deployment.apps/istiod                 1/1     1            1           2m54s
 
 NAME                                              DESIRED   CURRENT   READY   AGE
-replicaset.apps/istio-ingressgateway-7596586df5   1         1         1       9m16s
-replicaset.apps/istiod-5c6c96f9c4                 1         1         1       9m24s
+replicaset.apps/istio-ingressgateway-64cffcd5f9   1         1         1       2m46s
+replicaset.apps/istiod-6d44db4bdc                 1         1         1       2m54s
 
-NAME                                                       REFERENCE                         TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
-horizontalpodautoscaler.autoscaling/istio-ingressgateway   Deployment/istio-ingressgateway   3%/80%    1         5         1          9m16s
+NAME                                                       REFERENCE                         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/istio-ingressgateway   Deployment/istio-ingressgateway   cpu: 2%/80%   1         5         1          2m46s
+
 ```
 
 #### cluster2 (NHN NKS) Istio 리소스 배포 현황 확인
 ```bash
-$ kubectl get all -n ${ISTIO_NAMESPACE} --context=${CLUSTER3_CONFIG[CTX]}
-NAME                                        READY   STATUS    RESTARTS   AGE
-pod/istio-ingressgateway-5df95c4895-kcrrv   1/1     Running   0          10m
-pod/istiod-5bdd85f847-swxk4                 1/1     Running   0          10m
+$ kubectl get all -n ${ISTIO_NAMESPACE} --context=${CLUSTER2_CONFIG[CTX]}
+NAME                                       READY   STATUS    RESTARTS   AGE
+pod/istio-ingressgateway-688f8957c-mngvp   1/1     Running   0          2m38s
+pod/istiod-87d94786d-8xrq8                 1/1     Running   0          2m44s
 
 NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                                                                                                      AGE
-service/istio-ingressgateway   LoadBalancer   10.254.216.17   133.xxx.xxx.xxx   15021:32380/TCP,80:32215/TCP,443:31685/TCP,31400:31715/TCP,15443:31549/TCP,15012:32498/TCP,15017:31299/TCP   10m
-service/istiod                 ClusterIP      10.254.166.12   <none>            15010/TCP,15012/TCP,443/TCP,15014/TCP                                                                        10m
+service/istio-ingressgateway   LoadBalancer   10.254.48.228   133.186.217.174   15021:31547/TCP,80:31920/TCP,443:30910/TCP,31400:31847/TCP,15443:32339/TCP,15012:30752/TCP,15017:30897/TCP   2m38s
+service/istiod                 ClusterIP      10.254.119.61   <none>            15010/TCP,15012/TCP,443/TCP,15014/TCP                                                                        2m44s
 
 NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/istio-ingressgateway   1/1     1            1           10m
-deployment.apps/istiod                 1/1     1            1           10m
+deployment.apps/istio-ingressgateway   1/1     1            1           2m38s
+deployment.apps/istiod                 1/1     1            1           2m44s
 
-NAME                                              DESIRED   CURRENT   READY   AGE
-replicaset.apps/istio-ingressgateway-5df95c4895   1         1         1       10m
-replicaset.apps/istiod-5bdd85f847                 1         1         1       10m
+NAME                                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/istio-ingressgateway-688f8957c   1         1         1       2m38s
+replicaset.apps/istiod-87d94786d                 1         1         1       2m44s
 
 NAME                                                       REFERENCE                         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
-horizontalpodautoscaler.autoscaling/istio-ingressgateway   Deployment/istio-ingressgateway   cpu: 2%/80%   1         5         1          10m
+horizontalpodautoscaler.autoscaling/istio-ingressgateway   Deployment/istio-ingressgateway   cpu: 2%/80%   1         5         1          2m38s
 ```
 <br> 
-
 
 
 ## <span id='5'>5. 샘플 애플리케이션 배포
@@ -501,7 +553,7 @@ $ wget https://raw.githubusercontent.com/istio/istio/master/samples/sleep/sleep.
 ```bash
 # 각 클러스터에 sample 네임스페이스 생성 및 Istio 사이드카 프록시 자동 주입 활성화
 # clusterN에 reviews-N 애플리케이션 배포
-for IDX in $(seq 1 "$CLUSTER_CNT"); do CTX="CLUSTER${IDX}_CONFIG[CTX]"; \
+$ for IDX in $(seq 1 "$CLUSTER_CNT"); do CTX="CLUSTER${IDX}_CONFIG[CTX]"; \
   echo "context: ${!CTX}"
   kubectl --context=${!CTX} create ns sample; \
   kubectl --context=${!CTX} label namespace sample istio-injection=enabled; \
@@ -509,10 +561,25 @@ for IDX in $(seq 1 "$CLUSTER_CNT"); do CTX="CLUSTER${IDX}_CONFIG[CTX]"; \
   kubectl --context=${!CTX} -n sample apply -f bookinfo.yaml -l account=reviews; \
   kubectl --context=${!CTX} -n sample apply -f bookinfo.yaml -l app=reviews,version=v${IDX}; \
 done
+context: ncloud
+namespace/sample created
+namespace/sample labeled
+service/reviews created
+serviceaccount/bookinfo-reviews created
+deployment.apps/reviews-v1 created
+context: nhn
+namespace/sample created
+namespace/sample labeled
+service/reviews created
+serviceaccount/bookinfo-reviews created
+deployment.apps/reviews-v2 created
 ```
 ```bash
 # cluster3에 sleep 애플리케이션 배포
-$ kubectl --context="${CLUSTER3_CONFIG[CTX]}" -n sample apply -f sleep.yaml
+$ kubectl --context="${CLUSTER1_CONFIG[CTX]}" -n sample apply -f sleep.yaml
+serviceaccount/sleep created
+service/sleep created
+deployment.apps/sleep created
 ```
 
 <br>
@@ -520,20 +587,128 @@ $ kubectl --context="${CLUSTER3_CONFIG[CTX]}" -n sample apply -f sleep.yaml
 
 ### <span id='5.2'>5.2. 멀티 클러스터 통신 테스트
 ```bash
-# cluster1의 reviews-v1 pod 조회
-$ kubectl get pods -l app=reviews --context="${CLUSTER1_CONFIG[CTX]}" -n sample
+# cluster1의 reviews-v1, sleep pod 조회
+$  kubectl get pods -l app=reviews --context="${CLUSTER1_CONFIG[CTX]}" -n sample
 NAME                          READY   STATUS    RESTARTS   AGE
-reviews-v2-65c9797659-zp6mf   2/2     Running   0          2m42s
+reviews-v1-848b8749df-lwk8r   2/2     Running   0          3m37s
 
-# cluster2의 reviews-v2, sleep pod 조회
+$ kubectl get pods -l app=sleep --context="${CLUSTER1_CONFIG[CTX]}" -n sample
+NAME                     READY   STATUS    RESTARTS   AGE
+sleep-868c754c4b-s8z6f   2/2     Running   0          103s
+
+# cluster2의 reviews-v2 pod 조회
 $ kubectl get pods -l app=reviews --context="${CLUSTER2_CONFIG[CTX]}" -n sample
 NAME                          READY   STATUS    RESTARTS   AGE
-reviews-v3-77947c4c78-7vvkf   2/2     Running   0          3m9s
-
-$ kubectl get pods -l app=sleep --context="${CLUSTER2_CONFIG[CTX]}" -n sample
-NAME                     READY   STATUS    RESTARTS   AGE
-sleep-5577c64d7c-9zg7w   2/2     Running   0          74s
+reviews-v2-5fdf9886c7-qfbvq   2/2     Running   0          3m43s
 ```
+```bash
+$ kubectl exec -it -n sample --context="${CLUSTER1_CONFIG[CTX]}" \
+"$(kubectl get pod -n sample --context="${CLUSTER1_CONFIG[CTX]}" -l app=sleep -o jsonpath='{.items[0].metadata.name}')" -c sleep -- sh
+
+~ $ curl reviews:9080/reviews/1
+{"id": "1","podname": "reviews-v1-848b8749df-fjfcp","clustername": "null","reviews": [{  "reviewer": "Reviewer1",  "text": "An extremely entertaining play by Shakespeare. The slapstick humour is refreshing!"},{  "reviewer": "Reviewer2",  "text": "Absolutely fun and entertaining. The play lacks thematic depth when compared to other plays by Shakespeare."}]}~ $ 
+~ $ curl reviews:9080/reviews/1
+{"id": "1","podname": "reviews-v2-5fdf9886c7-mkp4l","clustername": "null","reviews": [{  "reviewer": "Reviewer1",  "text": "An extremely entertaining play by Shakespeare. The slapstick humour is refreshing!", "rating": {"error": "Ratings service is currently unavailable"}},{  "reviewer": "Reviewer2",  "text": "Absolutely fun and entertaining. The play lacks thematic depth when compared to other plays by Shakespeare.", "rating": {"error": "Ratings service is currently unavailable"}}]}
+```
+
+
+- 주의할 점
+    - 멀티 구성 후 트래픽을 보내기 위해서는 destination, gateway, virtualservice, serviceentry의 배포가 필요하다.
+    - destination, gateway, virtualservice, serviceentry 하나라도 배포되지않으면 정상적인 통신 불가능
+```yaml
+#$ vi destination.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: reviews-destination
+  namespace: sample
+spec:
+  host: reviews.sample.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+
+#$ vi gateways.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: cluster2-gateway
+  namespace: sample
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 15443
+      name: tls
+      protocol: TLS
+    tls:
+      mode: PASSTHROUGH
+    hosts:
+    - "*.sample.svc.cluster.local"
+
+#$ vi virtualservice.yaml 
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: reviews-routing
+  namespace: sample
+spec:
+  gateways:
+  - cluster2-gateway
+  hosts:
+  - reviews.sample.svc.cluster.local
+  http:
+  - match:
+    - sourceLabels:
+        app: sleep
+    route:
+    - destination:
+        host: reviews.sample.svc.cluster.local
+        subset: v1  # 클러스터1 (v1)에서 호출 시
+      weight: 30
+  - match:
+    - sourceLabels:
+        app: sleep
+    route:
+    - destination:
+        host: reviews.sample.svc.cluster.local
+        subset: v2  # 클러스터2 (v2)에서 호출 시
+      weight: 70
+
+#$ vi serviceentry.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: reviews-cluster2
+  namespace: sample
+spec:
+  hosts:
+  - reviews.sample.svc.cluster.local
+  location: MESH_INTERNAL
+  ports:
+  - number: 9080
+    name: http
+    protocol: HTTP
+  resolution: DNS
+  addresses:
+  endpoints:
+  - address: 133.186.217.174
+    ports:
+      http: 15443  # 일반적으로 east-west gateway 포트
+  exportTo:
+  - "."
+```
+
+
+
 ## <span id='6'>6. Istio 멀티 클러스터 구성 삭제
 Istio 멀티 클러스터 구성의 삭제를 원하는 경우 아래 스크립트를 실행한다.<br>
 :loudspeaker: (주의) 해당 스크립트 실행 시, **Istio 멀티클러스터 구성이 모두 제거**되므로 주의가 필요하다.<br>
