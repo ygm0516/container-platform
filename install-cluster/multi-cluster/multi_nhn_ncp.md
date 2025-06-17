@@ -672,7 +672,7 @@ spec:
     route:
     - destination:
         host: reviews.sample.svc.cluster.local
-        subset: v1  # 클러스터1 (v1)에서 호출 시
+        subset: v1 
       weight: 30
   - match:
     - sourceLabels:
@@ -680,8 +680,8 @@ spec:
     route:
     - destination:
         host: reviews.sample.svc.cluster.local
-        subset: v2  # 클러스터2 (v2)에서 호출 시
-      weight: 70
+        subset: v2  
+      weight: 70 
 
 #$ vi serviceentry.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -702,7 +702,7 @@ spec:
   endpoints:
   - address: 133.186.217.174
     ports:
-      http: 15443  # 일반적으로 east-west gateway 포트
+      http: 15443 
   exportTo:
   - "."
 ```
