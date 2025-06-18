@@ -104,7 +104,7 @@ Istio를 활용하여 **`2개의 클러스터`** 를 기반으로 멀티 클러�
 #### CSP 쿠버네티스 클러스터 환경
 | Kubernetes Service | Version |CNI| Server Image |
 | --- | --- | --- | --- |
-| Ncloud Kubernetes Service (NKS) | v1.28.10 |Cilium| Ubuntu 22.04 |
+| Ncloud Kubernetes Service (NKS) | v1.32.3 |Cilium| Ubuntu 24.04 |
 | NHN kubernetes Service (NKS) | v1.32.3 |Calico| Ubuntu 22.04 |
 
 <br>
