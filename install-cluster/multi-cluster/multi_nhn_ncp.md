@@ -613,8 +613,8 @@ $ kubectl exec -it -n sample --context="${CLUSTER1_CONFIG[CTX]}" \
 
 
 - 주의할 점
-    - 멀티 구성 후 트래픽을 보내기 위해서는 destination, gateway, virtualservice, serviceentry의 배포가 필요하다.
-    - destination, gateway, virtualservice, serviceentry 하나라도 배포되지않으면 정상적인 통신 불가능
+    - 멀티 구성 후 트래픽을 보내기 위해서는 destinationrule, gateway, virtualservice, serviceentry의 배포가 필요하다.
+    - destinationrule, gateway, virtualservice, serviceentry 하나라도 배포되지않으면 정상적인 통신 불가능
 ```yaml
 #$ vi destination.yaml
 apiVersion: networking.istio.io/v1beta1
