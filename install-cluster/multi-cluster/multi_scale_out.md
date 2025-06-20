@@ -1,4 +1,4 @@
-## CSP 쿠버네티스 서비스 Istio 멀티 클러스터 구성 가이드(NAVER-NHN)
+## [대표 포털] 멀티 클러스터 환경 생성 및 Scale-out 가이드
 
 <br>
 
@@ -154,7 +154,7 @@ portal-test-cluster-default-worker-node-0   588m         29%    5278Mi          
 
 
 
-### <span id='3.1.1'> 3.1.1 정상 작동 확인
+### <span id='.1.1'> 3.1.1 정상 작동 확인
 > 노드 스펙변경시작부터 파드가 완전히 올라오는 것까지 약 7~10분 소요
 > nhncloud 운영 클러스터의 경우 노드가 1개로 구성되어있어 순단 발생 가능성 있음
 
@@ -253,9 +253,9 @@ portal-test-node-03-w-7104   Ready    <none>   22m   v1.32.3
 ![alt text](image-9.png)
 
 
-## <span id='3'> 3. scale in
+## <span id='4'> 4. scale in
 scale in 하는 과정은 2. scale out과 과정은 동일하여 자세한 방법은 2.scale out을 참조한다.
-### <span id='3.1'> 3.1. NHN cluster scale in
+### <span id='4.1'> 4.1. NHN cluster scale in
 - 변경 전
 
 ![alt text](image-10.png)
@@ -264,18 +264,20 @@ scale in 하는 과정은 2. scale out과 과정은 동일하여 자세한 방�
 
 ![alt text](image-15.png)
 
-### <span id='3.1.1'> 3.1.1 정상 작동 확인
+### <span id='4.1.1'> 4.1.1 정상 작동 확인
 ![alt text](image-14.png)
-### <span id='3.2'> 3.2. NCP cluster node scale in
-### <span id='3.2.1'> 3.2.1 nodepool scale in
+### <span id='4.2'> 4.2. NCP cluster node scale in
+### <span id='4.2.1'> 4.2.1 nodepool scale in
 1. scale in할 노드풀 추가
 
 ![alt text](image-12.png)
 ![alt text](image-13.png)
 
 2. 기존 노드풀 삭제
+
 ![alt text](image-16.png)
 
 ![alt text](image-17.png)
-### <span id='3.2.2'> 3.2.2 정상 작동 확인
+
+### <span id='4.2.2'> 4.2.2 정상 작동 확인
 ![alt text](image-18.png)
