@@ -330,14 +330,6 @@ cilium-pzrb4   1/1     Running   0          22s
 ```bash
 $ cd ~/workspace/container-platform/cp-portal-deployment/istio_mc
 $ vi istio-vars-mc.sh 
-
-#이부분 추가
-declare -A CLUSTER1_CONFIG
-declare -A CLUSTER2_CONFIG
-# COMMON VARIABLE (Please change the value of the variables below.)
-CLUSTER1_CONFIG[CTX]="ncloud"    # Cluster1 Context Name
-CLUSTER2_CONFIG[CTX]="nhn"    # Cluster2 Context Name
-
 # The belows are the default values.
 # If you change the values below, there will be a problem with the deploy. Please keep the values.
 # TOOL
