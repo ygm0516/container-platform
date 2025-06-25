@@ -215,11 +215,6 @@ cluster1-config  cluster2-config
 # kubeconfig 파일 경로 설정
 $ export KUBECONFIG="${HOME}/.kube/cluster1-config:${HOME}/.kube/cluster2-config"
 
-# context 이름 변경
-$ kubectl config rename-context nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4 ncloud
-Context "nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4" renamed to "ncloud".
-$ kubectl config rename-context nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160 nhn
-Context "nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160" renamed to "nhn".
 ```
 ##### `NAME`, `CLUSTER`, `AUTHINFO` 값 출력 정상 확인
 
@@ -454,10 +449,7 @@ customresourcedefinition.apiextensions.k8s.io/gatewayclasses.gateway.networking.
 customresourcedefinition.apiextensions.k8s.io/gateways.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.io created
 customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
-Error: nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4 is not a valid DNS 1123 label
-error: no objects passed to apply
-Error: nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160 is not a valid DNS 1123 label
-error: no objects passed to apply
+
 
 --------------------------------------------------------------
 [cluster1 (ncloud)] $ istioctl remote-clusters
@@ -613,27 +605,30 @@ $ kubectl exec -it -n sample --context="${CLUSTER1_CONFIG[CTX]}" \
 
 
 - 주의할 점
-    - 멀티 구성 후 트래픽을 보내기 위해서는 destinationrule, gateway, virtualservice, serviceentry의 배포가 필요하다.
-    - destinationrule, gateway, virtualservice, serviceentry 하나라도 배포되지않으면 정상적인 통신 불가능
+    -  나는 destinationrule, serviceentry까지 배포해주어야 정상적인 통신이 가능하였는데 이는 멀티클러스터가 정상적으로 설치되지않은 것이고 나의 경우에는 context 이름이 규격에 맞지않아 설치가 정상적으로 되지않는 문제가 발생하였던 것이었다.
+    -  `로그을 잘 보자^^`
+  
+```bash
+✔ Installation complete                                                                                                                                                                                                                                     
+gateway.networking.istio.io/cross-network-gateway unchanged
+Error: nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4 is not a valid DNS 1123 label
+error: no objects passed to apply
+Error: nks_portal-test-cluster_7132dd1d-2142-45a4-a7b1-1f0ead2fc160 is not a valid DNS 1123 label
+error: no objects passed to apply
+
+#위처럼 이름때문에 에러가 발생할 경우 아래 명령어를 참고하여 등록한다.
+$ istioctl create-remote-secret --context=ncloud --name=ncloud  | kubectl apply -f - --context=nhn
+$ istioctl create-remote-secret --context=nhn --name=nhn  | kubectl apply -f - --context=ncloud
+
+$ istioctl remote-clusters
+NAME                                                                SECRET                                                                                            STATUS     ISTIOD
+nks_kr_portal-test-cluster_e50cf226-309b-4c00-8953-a32ff962f8d4                                                                                                       synced     istiod-6d44db4bdc-gkcg5
+nks-portal-test-cluster-7132dd1d-2142-45a4-a7b1-1f0ead2fc160        istio-system/istio-remote-secret-nks-portal-test-cluster-7132dd1d-2142-45a4-a7b1-1f0ead2fc160     synced     istiod-6d44db4bdc-gkcg5
+
+
+```
+
 ```yaml
-#$ vi destination.yaml
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  name: reviews-destination
-  namespace: sample
-spec:
-  host: reviews.sample.svc.cluster.local
-  subsets:
-  - name: v1
-    labels:
-      version: v1
-  - name: v2
-    labels:
-      version: v2
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
 
 #$ vi gateways.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -673,7 +668,6 @@ spec:
     - destination:
         host: reviews.sample.svc.cluster.local
         subset: v1 
-      weight: 30
   - match:
     - sourceLabels:
         app: sleep
@@ -681,30 +675,6 @@ spec:
     - destination:
         host: reviews.sample.svc.cluster.local
         subset: v2  
-      weight: 70 
-
-#$ vi serviceentry.yaml
-apiVersion: networking.istio.io/v1beta1
-kind: ServiceEntry
-metadata:
-  name: reviews-cluster2
-  namespace: sample
-spec:
-  hosts:
-  - reviews.sample.svc.cluster.local
-  location: MESH_INTERNAL
-  ports:
-  - number: 9080
-    name: http
-    protocol: HTTP
-  resolution: DNS
-  addresses:
-  endpoints:
-  - address: 133.186.217.174
-    ports:
-      http: 15443 
-  exportTo:
-  - "."
 ```
 
 

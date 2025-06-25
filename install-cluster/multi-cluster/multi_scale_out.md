@@ -161,10 +161,11 @@ portal-test-cluster-default-worker-node-0   588m         29%    5278Mi          
 ![alt text](image-3.png)
 
 ### <span id='3.2'> 3.2. NCP cluster node scale out
-### <span id='3.2.1'> 3.2.1 nodepool scale out (방법 1)
  ![ncp spec 변경 관련 Faq](image.png)
  >naver cloud 환경에서 기존에 사용하던 노드(IP)변경없이 scale out은 불가능함을 확인 <br>
- >따라서 변경할 스펙으로 노드풀을 추가한다음 기존에 사용중인 노드풀을 삭제해도 멀티 클러스터가 정상적으로 작동하는지를 확인하는 절차를 진행한다.
+ >따라서 변경할 스펙으로 노드풀을 추가한 다음 기존에 사용중인 노드풀을 삭제해도 멀티 클러스터가 정상적으로 작동하는지를 확인하는 절차를 진행한다.
+
+### <span id='3.2.1'> 3.2.1 nodepool scale out (방법 1)
 
 1. naver cloud 로그인 후 `NCloud Kubernetes Service(NKS) > Cluster ` 접속한다.
 2. 변경할 클러스터를 선택한다.
@@ -197,30 +198,28 @@ portal-test-node-w-3f6k      Ready    <none>   3d5h   v1.32.3
 portal-test-node-w-3f6l      Ready    <none>   3d5h   v1.32.3
 ```
 
-1. 기존 노드풀을 삭제하기 위해 선택한다.
-
+8. 기존 노드풀을 삭제하기 위해 선택한다.
+- 주의사항
+기존의 노드풀을 삭제하게되면 서버자원까지 모두 삭제가 진행된다.<br>
+해당 서버 안에 있는 자원들의 백업 절차가 선행적으로 필요하다. <br>
 ![alt text](그림13.jpg)
 
-2. 삭제를 누른다.
+9. 삭제를 누른다.
 
 ![alt text](그림12.jpg)
 
-3.  기존 노드풀이 삭제된 것을 확인한다.
-4.  기존 노드풀이 삭제되면서 도메인에 연결된 공인Ip까지 반납되어 정상접속이 불가능할것으로 예상 <br>
+10.  기존 노드풀이 삭제된 것을 확인한다.
 
 테스트 환경의 경우 [외부IP]:[노드포트] 형식으로 접근 가능<br>
 새로 생성된 서버에 접속하여 CSP 쿠버네티스 서비스 Istio 멀티 클러스터 구성 가이드(NAVER-NHN)의 3번부터 4.1까지 실행<br>
-도메인 변경까지 새로 생성된 서버의 IP로 변경 필요
 >변경된 공인ip값으로 정상 접속 확인
 
 ![alt text](image-4.png)
 
->> 현재 대표포털이 운영되고 있어 해당 방법은 부적절할수 있음(순단이 오래 지속됨(약 40분))
-
 
 
 ### <span id='3.2.2'> 3.2.2 nodepool scale out (방법 2)
-노드풀을 생성한 다음 기존 노드풀 모두를 삭제하지 말고 도메인이 연결된 공인ip가 붙은 서버만 제외하고 삭제하는 방법
+노드풀을 생성한 다음 기존 노드풀 모두를 삭제하지 말고 순차적으로 업그레이드 및 삭제를 진행하는 방법
 
 1. 노드풀 추가
 
@@ -232,7 +231,7 @@ portal-test-node-w-3f6l      Ready    <none>   3d5h   v1.32.3
 ![alt text](image-6.png)
 
 
-2. 기존 노드풀에서 도메인연결이 되지 않은 공인IP를 가진 서버 삭제
+1. 기존 노드풀에서 하나의 노드를 먼저 선행적으로 삭제를 진행
 
 ![alt text](image-7.png)
 
@@ -246,11 +245,18 @@ NAME                         STATUS   ROLES    AGE   VERSION
 portal-test-node-02-w-7090   Ready    <none>   81m   v1.32.3
 portal-test-node-03-w-7104   Ready    <none>   22m   v1.32.3
 ```
-방법2 실행시 테스트 클러스터에서는 순단 발생하지 않음
 
 >정상 접속 확인
 
 ![alt text](image-9.png)
+
+- vCPU 8EA, Memory 32GB(vCPU 4EA, Memory 16GB * 2개) 스펙 업그레이드시 자원상태
+```bash
+$ kubectl top node
+NAME                         CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
+portal-test-node-02-w-7090   893m         22%    9208Mi          69%       
+portal-test-node-03-w-563f   51m          1%     810Mi           6% 
+```
 
 
 ## <span id='4'> 4. scale in

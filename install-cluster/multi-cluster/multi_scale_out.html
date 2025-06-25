@@ -520,12 +520,12 @@ nhncloud 운영 클러스터의 경우 노드가 1개로 구성되어있어 순�
 </blockquote>
 <p><img src="image-3.png" alt="alt text"></p>
 <h3 id="span-id32-32-ncp-cluster-node-scale-out"><span id='3.2'> 3.2. NCP cluster node scale out</h3>
-<h3 id="span-id321-321-nodepool-scale-out-%EB%B0%A9%EB%B2%95-1"><span id='3.2.1'> 3.2.1 nodepool scale out (방법 1)</h3>
 <p><img src="image.png" alt="ncp spec 변경 관련 Faq"></p>
 <blockquote>
 <p>naver cloud 환경에서 기존에 사용하던 노드(IP)변경없이 scale out은 불가능함을 확인 <br>
-따라서 변경할 스펙으로 노드풀을 추가한다음 기존에 사용중인 노드풀을 삭제해도 멀티 클러스터가 정상적으로 작동하는지를 확인하는 절차를 진행한다.</p>
+따라서 변경할 스펙으로 노드풀을 추가한 다음 기존에 사용중인 노드풀을 삭제해도 멀티 클러스터가 정상적으로 작동하는지를 확인하는 절차를 진행한다.</p>
 </blockquote>
+<h3 id="span-id321-321-nodepool-scale-out-%EB%B0%A9%EB%B2%95-1"><span id='3.2.1'> 3.2.1 nodepool scale out (방법 1)</h3>
 <ol>
 <li>naver cloud 로그인 후 <code>NCloud Kubernetes Service(NKS) &gt; Cluster </code> 접속한다.</li>
 <li>변경할 클러스터를 선택한다.</li>
@@ -556,32 +556,30 @@ portal-test-node-02-w-8059   Ready    &lt;none&gt;   10m    v1.32.3
 portal-test-node-w-3f6k      Ready    &lt;none&gt;   3d5h   v1.32.3
 portal-test-node-w-3f6l      Ready    &lt;none&gt;   3d5h   v1.32.3
 </div></code></pre>
-<ol>
+<ol start="8">
 <li>기존 노드풀을 삭제하기 위해 선택한다.</li>
 </ol>
-<p><img src="그림13.jpg" alt="alt text"></p>
-<ol start="2">
+<ul>
+<li>주의사항
+기존의 노드풀을 삭제하게되면 서버자원까지 모두 삭제가 진행된다.<br>
+해당 서버 안에 있는 자원들의 백업 절차가 선행적으로 필요하다. <br>
+<img src="그림13.jpg" alt="alt text"></li>
+</ul>
+<ol start="9">
 <li>삭제를 누른다.</li>
 </ol>
 <p><img src="그림12.jpg" alt="alt text"></p>
-<ol start="3">
+<ol start="10">
 <li>기존 노드풀이 삭제된 것을 확인한다.</li>
-<li>기존 노드풀이 삭제되면서 도메인에 연결된 공인Ip까지 반납되어 정상접속이 불가능할것으로 예상 <br></li>
 </ol>
 <p>테스트 환경의 경우 [외부IP]:[노드포트] 형식으로 접근 가능<br>
-새로 생성된 서버에 접속하여 CSP 쿠버네티스 서비스 Istio 멀티 클러스터 구성 가이드(NAVER-NHN)의 3번부터 4.1까지 실행<br>
-도메인 변경까지 새로 생성된 서버의 IP로 변경 필요</p>
+새로 생성된 서버에 접속하여 CSP 쿠버네티스 서비스 Istio 멀티 클러스터 구성 가이드(NAVER-NHN)의 3번부터 4.1까지 실행<br></p>
 <blockquote>
 <p>변경된 공인ip값으로 정상 접속 확인</p>
 </blockquote>
 <p><img src="image-4.png" alt="alt text"></p>
-<blockquote>
-<blockquote>
-<p>현재 대표포털이 운영되고 있어 해당 방법은 부적절할수 있음(순단이 오래 지속됨(약 40분))</p>
-</blockquote>
-</blockquote>
 <h3 id="span-id322-322-nodepool-scale-out-%EB%B0%A9%EB%B2%95-2"><span id='3.2.2'> 3.2.2 nodepool scale out (방법 2)</h3>
-<p>노드풀을 생성한 다음 기존 노드풀 모두를 삭제하지 말고 도메인이 연결된 공인ip가 붙은 서버만 제외하고 삭제하는 방법</p>
+<p>노드풀을 생성한 다음 기존 노드풀 모두를 삭제하지 말고 순차적으로 업그레이드 및 삭제를 진행하는 방법</p>
 <ol>
 <li>노드풀 추가</li>
 </ol>
@@ -589,8 +587,8 @@ portal-test-node-w-3f6l      Ready    &lt;none&gt;   3d5h   v1.32.3
 <img src="image-5.png" alt="alt text"></p>
 <br>
 <p><img src="image-6.png" alt="alt text"></p>
-<ol start="2">
-<li>기존 노드풀에서 도메인연결이 되지 않은 공인IP를 가진 서버 삭제</li>
+<ol>
+<li>기존 노드풀에서 하나의 노드를 먼저 선행적으로 삭제를 진행</li>
 </ol>
 <p><img src="image-7.png" alt="alt text"></p>
 <br>
@@ -600,11 +598,18 @@ NAME                         STATUS   ROLES    AGE   VERSION
 portal-test-node-02-w-7090   Ready    &lt;none&gt;   81m   v1.32.3
 portal-test-node-03-w-7104   Ready    &lt;none&gt;   22m   v1.32.3
 </div></code></pre>
-<p>방법2 실행시 테스트 클러스터에서는 순단 발생하지 않음</p>
 <blockquote>
 <p>정상 접속 확인</p>
 </blockquote>
 <p><img src="image-9.png" alt="alt text"></p>
+<ul>
+<li>vCPU 8EA, Memory 32GB(vCPU 4EA, Memory 16GB * 2개) 스펙 업그레이드시 자원상태</li>
+</ul>
+<pre class="hljs"><code><div>$ kubectl top node
+NAME                         CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
+portal-test-node-02-w-7090   893m         22%    9208Mi          69%       
+portal-test-node-03-w-563f   51m          1%     810Mi           6% 
+</div></code></pre>
 <h2 id="span-id4-4-scale-in"><span id='4'> 4. scale in</h2>
 <p>scale in 하는 과정은 2. scale out과 과정은 동일하여 자세한 방법은 2.scale out을 참조한다.</p>
 <h3 id="span-id41-41-nhn-cluster-scale-in"><span id='4.1'> 4.1. NHN cluster scale in</h3>
