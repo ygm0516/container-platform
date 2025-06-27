@@ -371,7 +371,8 @@ $ ls
 2. 각 클러스터의 istiod 상태 확인<br>
 `kubectl get pods -n istio-system` 등으로 istiod pod 정상 동작 여부 확인
 
-3. (필요시) LoadBalancer 변경 여부 확인 및 업데이트(lb는 변경되지 않으나 확인은 필요)
+3. (필요시) LoadBalancer 변경 여부 확인 및 업데이트(lb는 변경되지 않으나 확인은 필요)<br>
+공모전도 동일 LB 사용
 
 4. redis는 내부 ip로 연동되고 있어 노드 변경 이후에도 문제 없을 것으로 예상 (운영 클러스터와 같은 vpc, subnet)
 ```sh
@@ -380,7 +381,8 @@ spring.redis.host=ENC(iWbiXQgUkdeSiYGeHKbH1RsnuxvdHmWz) #10.0.10.8
 ```
 5. redis server acg 변경 (22port 개방 필요(변경된 vm))
 
-
+6. 변경된 노드 IP로 db acg 변경 필요
+![alt text](image-29.png)
 
 ## <span id='4'> 4. scale in
 scale in 하는 과정은 2. scale out과 과정은 동일하여 자세한 방법은 2.scale out을 참조한다.
