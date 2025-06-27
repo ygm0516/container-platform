@@ -18,7 +18,7 @@
    3.2. [NCP cluster node scale out](#3.2)  
    3.2.1 [ nodepool scale out (방법 1)](#3.2.1)     
    3.2.2 [ nodepool scale out (방법 2)](#3.2.2)     
-
+   3.3.[노드 추가 및 삭제 정상 작동 확인 테스트](#3.3)  
 
 4. [scale in](#4)  
    4.1. [NHN cluster scale in](#4.1)  
@@ -165,6 +165,8 @@ portal-test-cluster-default-worker-node-0   588m         29%    5278Mi          
  >naver cloud 환경에서 기존에 사용하던 노드(IP)변경없이 scale out은 불가능함을 확인 <br>
  >따라서 변경할 스펙으로 노드풀을 추가한 다음 기존에 사용중인 노드풀을 삭제해도 멀티 클러스터가 정상적으로 작동하는지를 확인하는 절차를 진행한다.
 
+
+
 ### <span id='3.2.1'> 3.2.1 nodepool scale out (방법 1)
 
 1. naver cloud 로그인 후 `NCloud Kubernetes Service(NKS) > Cluster ` 접속한다.
@@ -250,6 +252,8 @@ portal-test-node-03-w-7104   Ready    <none>   22m   v1.32.3
 
 ![alt text](image-9.png)
 
+>노드 추가 전
+
 - vCPU 8EA, Memory 32GB(vCPU 4EA, Memory 16GB * 2개) 스펙 업그레이드시 자원상태
 ```bash
 $ kubectl top node
@@ -257,6 +261,125 @@ NAME                         CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
 portal-test-node-02-w-7090   893m         22%    9208Mi          69%       
 portal-test-node-03-w-563f   51m          1%     810Mi           6% 
 ```
+
+
+
+### <span id='3.3'> 3.3 노드 추가 및 삭제 정상 작동 확인 테스트
+1. 노드 추가 전 정상 작동 확인
+
+![alt text](image-19.png)
+
+```bash
+# 노드 추가 전 
+$ kubectl get node
+NAME                         STATUS   ROLES    AGE     VERSION
+portal-test-node-02-w-7090   Ready    <none>   5d1h    v1.32.3
+portal-test-node-03-w-563f   Ready    <none>   2d1h    v1.32.3
+```
+
+
+2. 노드 추가 후 정상 작동 확인
+
+![alt text](image-20.png)
+```bash
+# portal-test-node-01-w-5ca7 추가
+$ kubectl get node
+NAME                         STATUS   ROLES    AGE     VERSION
+portal-test-node-01-w-5ca7   Ready    <none>   2m38s   v1.32.3 ##추가된 노드
+portal-test-node-02-w-7090   Ready    <none>   5d1h    v1.32.3
+portal-test-node-03-w-563f   Ready    <none>   2d1h    v1.32.3
+```
+
+3. 노드 삭제 후 정상 작동 확인(storage 확인)
+
+> pvc-e23465dbb1da4b649f5f51e78e이 붙어있는 노드 3삭제
+![alt text](image-21.png)
+![alt text](image-22.png)
+
+> 해제된 pv 사용 가능, 잔여 자원으로 남아있음
+![alt text](image-24.png)
+
+>해제된 자원은 새로 생성한 노드에 연결 가능
+![alt text](image-25.png)
+
+- 노드 추가와 삭제를 진행한 다음에도 정상적으로 작동함을 확인
+![alt text](image-26.png)
+
+- 노드 변경 이후 파일 업로드 기능도 문제 없음
+![alt text](image-27.png)
+```bash
+# portal-test-node-03-w-563f 삭제
+$ kubectl get node
+NAME                         STATUS   ROLES    AGE     VERSION
+portal-test-node-01-w-5ca7   Ready    <none>   2m38s   v1.32.3
+portal-test-node-02-w-7090   Ready    <none>   5d1h    v1.32.3
+```
+
+#### 운영 클러스터 사용 storage
+- 대표 포털 운영 클러스터 storage
+   - node 1<br>
+![alt text](clipboard-202506260941-3zygo.png)
+   - node 2<br>
+![alt text](clipboard-202506260942-1tkmc.png)
+
+![alt text](image-28.png)
+pvc-59507a17d531456c9dd5e40af6 (jenkins)<br>
+pvc-8d886ebde11c495aa22e22f0da (공모전 log)<br>
+backup-pv-volume (포털 log) hostpath(vm 삭제시 유실)
+```bash
+Name:            backup-pv-volume
+Labels:          <none>
+Annotations:     pv.kubernetes.io/bound-by-controller: yes
+Finalizers:      [kubernetes.io/pv-protection]
+StorageClass:    nks-block-storage
+Status:          Bound
+Claim:           kps/backup-pv-claim
+Reclaim Policy:  Retain
+Access Modes:    RWX
+VolumeMode:      Filesystem
+Capacity:        10Gi
+Node Affinity:   <none>
+Message:         
+Source:
+    Type:          HostPath (bare host directory volume)
+    Path:          /data/logs
+    HostPathType:  
+Events:            <none>
+
+$ cd /data/logs/
+$ ls
+2025-04-16  2025-05-26	2025-05-28  2025-05-30	2025-06-01  2025-06-03	2025-06-05  2025-06-07	2025-06-09  2025-06-11	2025-06-13  2025-06-15	2025-06-17  2025-06-19	2025-06-21  2025-06-23	2025-06-25  content.log  operate.log  user.log
+2025-05-25  2025-05-27	2025-05-29  2025-05-31	2025-06-02  2025-06-04	2025-06-06  2025-06-08	2025-06-10  2025-06-12	2025-06-14  2025-06-16	2025-06-18  2025-06-20	2025-06-22  2025-06-24	common.log  contest	 support.log  zuul.log
+```
+
+
+- 현재 node1에서 crontab 작동중
+```bash
+# portal log backup(backup-pv-volume)
+0 23 * * * /home1/ncloud/workspace/config/log/backup-logs.sh >> /home1/ncloud/workspace/config/log/cron.log 2>&1
+
+# contest log backup(pvc-8d886ebde11c495aa22e22f0da)
+0 23 * * * /home1/ncloud/contest/config/log/log-dump.sh >> /home1/ncloud/contest/config/log/log-dump-cron.log 2>&1
+```
+
+-  CSP 쿠버네티스 서비스 Istio 멀티 클러스터 구성 시 별도의 nfs 설정 없음
+
+#### 노드 추가 및 삭제 이후 확인 사항
+1. Istio remote secret 동기화 상태 점검<br>
+`istioctl remote-clusters` 명령어를 통해 상태가 synced인지 확인
+
+2. 각 클러스터의 istiod 상태 확인<br>
+`kubectl get pods -n istio-system` 등으로 istiod pod 정상 동작 여부 확인
+
+3. (필요시) LoadBalancer 변경 여부 확인 및 업데이트(lb는 변경되지 않으나 확인은 필요)
+
+4. redis는 내부 ip로 연동되고 있어 노드 변경 이후에도 문제 없을 것으로 예상 (운영 클러스터와 같은 vpc, subnet)
+```sh
+#spring application-prd.properties
+spring.redis.host=ENC(iWbiXQgUkdeSiYGeHKbH1RsnuxvdHmWz) #10.0.10.8
+```
+5. redis server acg 변경 (22port 개방 필요(변경된 vm))
+
 
 
 ## <span id='4'> 4. scale in
